@@ -20,6 +20,11 @@
 - **The word "clean" is reserved for full coverage.** When any in-scope list failed to load, zero-hit indicators must be labeled `no hits (N/M lists)` instead.
 - **Node 20+** for the toolchain.
 - **Vite `base` must be `'./'`** so the build works from a GitHub Pages project subpath.
+- **CI supply-chain hardening.** Every GitHub Action is pinned to a full commit
+  SHA with a trailing `# vN` comment, never a moving tag. Every workflow job
+  begins with a `step-security/harden-runner` step. Workflow-level `permissions`
+  is `{}` and each job declares its own minimum. Dependabot keeps both the
+  action SHAs and the npm devDependencies current.
 
 ## Terminology
 
@@ -3418,18 +3423,20 @@ Check, in order:
 
 - [ ] **Step 5: Create `.github/workflows/deploy.yml`**
 
+Every action is pinned to a full commit SHA rather than a moving tag, every
+job starts with `harden-runner`, and permissions are granted per job rather
+than globally — the build job never needs `pages: write`.
+
 ```yaml
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# No workflow-level permissions block: each job declares its own minimum.
+permissions: {}
 
 concurrency:
   group: pages
@@ -3438,29 +3445,50 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          # Start in audit so the first runs record real egress. Once the
+          # Insights page shows a stable endpoint set, switch to `block` and
+          # add an allowed-endpoints list.
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
           cache: npm
+
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          egress-policy: audit
+
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 ```
 
 - [ ] **Step 6: Create `.github/workflows/catalog-drift.yml`**
@@ -3475,16 +3503,22 @@ on:
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
-permissions:
-  contents: read
-  issues: write
+permissions: {}
 
 jobs:
   drift:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
           cache: npm
@@ -3513,7 +3547,7 @@ jobs:
 
       - name: Open an issue
         if: steps.diff.outputs.drift == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const body = process.env.BODY
@@ -3535,6 +3569,40 @@ jobs:
             }
         env:
           BODY: ${{ steps.diff.outputs.body }}
+```
+
+- [ ] **Step 6b: Create `.github/dependabot.yml`**
+
+Because every action is pinned to a SHA, Dependabot is what keeps those pins
+moving — it bumps the SHA and rewrites the trailing `# v4` comment. Without it,
+SHA pinning silently freezes the actions at today's versions forever.
+
+```yaml
+version: 2
+updates:
+  # Keeps the SHA-pinned actions above current. Dependabot rewrites both the
+  # SHA and its trailing version comment.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(actions)'
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      # This project has zero runtime dependencies, so every update is a
+      # devDependency; one grouped PR per week rather than five.
+      dev-dependencies:
+        patterns: ['*']
 ```
 
 - [ ] **Step 7: Create `README.md`**
@@ -3582,7 +3650,7 @@ npm run build:catalog  # regenerate src/catalog.json from upstream
 - [ ] **Step 8: Commit**
 
 ```bash
-git add src/ui/app.ts src/main.ts .github/workflows/deploy.yml .github/workflows/catalog-drift.yml README.md
+git add src/ui/app.ts src/main.ts .github/workflows/deploy.yml .github/workflows/catalog-drift.yml .github/dependabot.yml README.md
 git commit -m "feat: wire up app shell, popularity opt-in, Pages deploy and drift check"
 ```
 
