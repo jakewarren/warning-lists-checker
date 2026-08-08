@@ -125,7 +125,9 @@ Two independent axes, deliberately not conflated:
 `base: './'` is required for GitHub Pages project sites, which serve from `/<repo>/`.
 
 ```ts
-import { defineConfig } from 'vite'
+// Imported from 'vitest/config', not 'vite' — the base defineConfig type does
+// not accept the `test` key and would fail `tsc --noEmit`.
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   base: './',
@@ -1543,7 +1545,7 @@ git commit -m "feat: add string, hostname, substring and regex matchers plus fac
 
 Rationale: consulting all 123 lists for every indicator is both slower and wrong. Upstream `matching_attributes` says which MISP attribute types a list is for. The observed vocabulary across all lists is: `domain|ip` (105), `ip-src` (74), `ip-dst` (74), `ip-src|port` (70), `ip-dst|port` (70), `hostname` (38), `domain` (38), `url` (27), `uri` (6), plus hash, email, phone and `azure-application-id` attributes.
 
-`domain|ip` is ambiguous on its own — it appears on both CIDR and hostname lists — so it counts toward IP applicability always, but toward host applicability only when the list type is not `cidr`.
+`domain|ip` is ambiguous on its own — it appears on 105 of the 123 lists, on both CIDR and hostname lists, because it is a composite attribute whose two halves belong to different indicator families. It must therefore be disambiguated by the list's `type` in **both** directions: it counts toward IP applicability only when the list is `cidr`, and toward host applicability only when it is not. Counting it unconditionally on the IP side would route all 105 lists to every IPv4 indicator instead of the correct 74.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1623,6 +1625,19 @@ describe('appliesTo', () => {
     expect(appliesTo(cidrList, 'unparseable')).toBe(false)
     expect(appliesTo(hostnameList, 'unparseable')).toBe(false)
   })
+
+  it('disambiguates the domain|ip composite attribute by list type', () => {
+    // domain|ip appears on 105 of 123 lists and covers both families at once,
+    // so on its own it must never pull a list into the wrong family.
+    const cidrComposite = entry({ type: 'cidr', matchingAttributes: ['domain|ip'] })
+    const hostComposite = entry({ type: 'hostname', matchingAttributes: ['domain|ip'] })
+
+    expect(appliesTo(cidrComposite, 'ipv4')).toBe(true)
+    expect(appliesTo(cidrComposite, 'domain')).toBe(false)
+
+    expect(appliesTo(hostComposite, 'domain')).toBe(true)
+    expect(appliesTo(hostComposite, 'ipv4')).toBe(false)
+  })
 })
 ```
 
@@ -1636,19 +1651,25 @@ Expected: FAIL — cannot resolve `./applicability`.
 ```ts
 import type { CatalogEntry, IndicatorType } from './types'
 
-/** Attributes that mean "this list is about IP addresses". */
+/**
+ * Attributes that unambiguously mean "this list is about IP addresses".
+ * `domain|ip` is deliberately absent — see COMPOSITE below.
+ */
 export const IP_ATTRS = new Set([
-  'ip-src', 'ip-dst', 'ip-src|port', 'ip-dst|port', 'domain|ip',
+  'ip-src', 'ip-dst', 'ip-src|port', 'ip-dst|port',
 ])
 
-/**
- * Attributes that mean "this list is about hostnames". `domain|ip` is
- * deliberately excluded here and handled separately, since it also appears on
- * CIDR lists where it refers to the IP half of the composite attribute.
- */
+/** Attributes that unambiguously mean "this list is about hostnames". */
 export const HOST_ATTRS = new Set([
   'hostname', 'domain', 'hostname|port', 'url', 'uri',
 ])
+
+/**
+ * A composite attribute covering both families at once. It appears on 105 of
+ * 123 lists, so it carries almost no signal on its own and must be
+ * disambiguated by the list's own type in both directions.
+ */
+const COMPOSITE = 'domain|ip'
 
 function intersects(attrs: string[], set: Set<string>): boolean {
   for (const a of attrs) {
@@ -1660,14 +1681,17 @@ function intersects(attrs: string[], set: Set<string>): boolean {
 export function appliesTo(entry: CatalogEntry, type: IndicatorType): boolean {
   if (type === 'unparseable') return false
 
+  const composite = entry.matchingAttributes.includes(COMPOSITE)
+
   if (type === 'ipv4' || type === 'ipv6') {
-    return intersects(entry.matchingAttributes, IP_ATTRS)
+    if (intersects(entry.matchingAttributes, IP_ATTRS)) return true
+    return composite && entry.type === 'cidr'
   }
 
   // domain | url
   if (entry.type === 'cidr') return false
   if (intersects(entry.matchingAttributes, HOST_ATTRS)) return true
-  return entry.matchingAttributes.includes('domain|ip')
+  return composite
 }
 ```
 
@@ -2132,7 +2156,7 @@ git commit -m "feat: add IndexedDB list cache with age-based decay and stale fal
 **Interfaces:**
 - Consumes: `parseInput` from `./parse`, `buildMatcher` from `./matchers`, `appliesTo` from `./applicability`, `CachedList` from `./listStore`, and the types from `./types`.
 - Produces: `createEngine(catalog: CatalogEntry[]): Engine`, where
-  `Engine = { ingest(lists: Map<string, CachedList>): void; run(raw: string, coverage: Omit<Coverage,'oldestFetchedAt'> & { oldestFetchedAt: number | null }): MatchReport }`.
+  `Engine = { ingest(lists: Map<string, CachedList>): void; run(raw: string, coverage: Coverage): MatchReport }`.
   Also `coverageLabel(c: Coverage): string` — the single place the "clean" vs "no hits (N/M)" rule lives.
 
 - [ ] **Step 1: Write the failing test**
