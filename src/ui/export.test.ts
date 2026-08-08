@@ -66,6 +66,22 @@ describe('toCsv', () => {
     }
     expect(toCsv(r)).toContain('"a""b.com"')
   })
+
+  it('quotes fields containing a carriage return', () => {
+    const r: MatchReport = {
+      ...REPORT,
+      results: [{ original: 'a\rb.com', normalized: 'a\rb.com', type: 'domain', hits: [] }],
+    }
+    expect(toCsv(r)).toContain('"a\rb.com"')
+  })
+
+  it('quotes fields containing a line feed', () => {
+    const r: MatchReport = {
+      ...REPORT,
+      results: [{ original: 'a\nb.com', normalized: 'a\nb.com', type: 'domain', hits: [] }],
+    }
+    expect(toCsv(r)).toContain('"a\nb.com"')
+  })
 })
 
 describe('toJson', () => {

@@ -29,7 +29,7 @@ export function toTsv(report: MatchReport): string {
 }
 
 function csvCell(s: string): string {
-  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+  return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
 }
 
 export function toCsv(report: MatchReport): string {
