@@ -59,6 +59,22 @@ describe('buildCidrMatcher — IPv4', () => {
   it('returns false for an empty list', () => {
     expect(buildCidrMatcher([]).match('8.8.8.8', 'ipv4')).toBe(false)
   })
+
+  it('rejects an entry with an empty or non-digit prefix instead of treating it as /0', () => {
+    const m3 = buildCidrMatcher(['10.0.0.0/'])
+    expect(m3.match('1.1.1.1', 'ipv4')).toBe(false)
+    expect(m3.match('10.0.0.0', 'ipv4')).toBe(false)
+
+    const m4 = buildCidrMatcher(['10.0.0.0/1e1'])
+    expect(m4.match('1.1.1.1', 'ipv4')).toBe(false)
+    expect(m4.match('10.0.0.0', 'ipv4')).toBe(false)
+  })
+
+  it('still matches everything for an explicit /0', () => {
+    const all = buildCidrMatcher(['0.0.0.0/0'])
+    expect(all.match('1.1.1.1', 'ipv4')).toBe(true)
+    expect(all.match('255.255.255.255', 'ipv4')).toBe(true)
+  })
 })
 
 describe('buildCidrMatcher — IPv6', () => {
@@ -81,6 +97,12 @@ describe('buildCidrMatcher — IPv6', () => {
 
   it('matches regardless of compressed or expanded input form', () => {
     expect(m.match('2001:0db8:0000:0000:0000:0000:0000:0001', 'ipv6')).toBe(true)
+  })
+
+  it('rejects an entry with an empty prefix instead of treating it as /0', () => {
+    const m5 = buildCidrMatcher(['2001:db8::/'])
+    expect(m5.match('::1', 'ipv6')).toBe(false)
+    expect(m5.match('2001:db8::1', 'ipv6')).toBe(false)
   })
 })
 

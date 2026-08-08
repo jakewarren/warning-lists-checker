@@ -12,7 +12,9 @@ function parseV4Cidr(entry: string): [number, number] | null {
   const base = ipv4ToInt(addr)
   if (base === null) return null
 
-  const prefix = slash === -1 ? 32 : Number(entry.slice(slash + 1))
+  const prefixStr = slash === -1 ? null : entry.slice(slash + 1)
+  if (prefixStr !== null && !/^\d+$/.test(prefixStr)) return null
+  const prefix = prefixStr === null ? 32 : Number(prefixStr)
   if (!Number.isInteger(prefix) || prefix < 0 || prefix > 32) return null
 
   // Avoid the undefined behaviour of << 32 in JS by special-casing /0.
@@ -27,7 +29,9 @@ function parseV6Cidr(entry: string): V6Range | null {
   const base = ipv6ToBigInt(addr)
   if (base === null) return null
 
-  const prefix = slash === -1 ? 128 : Number(entry.slice(slash + 1))
+  const prefixStr = slash === -1 ? null : entry.slice(slash + 1)
+  if (prefixStr !== null && !/^\d+$/.test(prefixStr)) return null
+  const prefix = prefixStr === null ? 128 : Number(prefixStr)
   if (!Number.isInteger(prefix) || prefix < 0 || prefix > 128) return null
 
   const hostBits = BigInt(128 - prefix)
