@@ -1,5 +1,10 @@
 import type { IndicatorType, Matcher } from '../types'
 
+// Contract: `match()` receives a value already refanged, lowercased and
+// port-stripped by parse.ts. Matchers lowercase their own entries (upstream
+// list data is not guaranteed lowercase) but never re-normalize the
+// indicator itself — that would be redundant work on a hot path.
+
 function isHostLike(type: IndicatorType): boolean {
   return type === 'domain' || type === 'url'
 }
@@ -22,12 +27,11 @@ export function buildHostnameMatcher(entries: string[]): Matcher {
   return {
     match(normalized: string, type: IndicatorType): boolean {
       if (!isHostLike(type)) return false
-      const n = normalized.toLowerCase()
-      if (set.has(n)) return true
-      let idx = n.indexOf('.')
+      if (set.has(normalized)) return true
+      let idx = normalized.indexOf('.')
       while (idx !== -1) {
-        if (set.has(n.slice(idx + 1))) return true
-        idx = n.indexOf('.', idx + 1)
+        if (set.has(normalized.slice(idx + 1))) return true
+        idx = normalized.indexOf('.', idx + 1)
       }
       return false
     },
@@ -38,9 +42,8 @@ export function buildSubstringMatcher(entries: string[]): Matcher {
   const list = entries.map((e) => e.trim().toLowerCase()).filter(Boolean)
   return {
     match(normalized: string): boolean {
-      const n = normalized.toLowerCase()
       for (const e of list) {
-        if (n.includes(e)) return true
+        if (normalized.includes(e)) return true
       }
       return false
     },

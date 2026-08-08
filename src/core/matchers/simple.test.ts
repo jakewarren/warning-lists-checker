@@ -46,9 +46,13 @@ describe('buildHostnameMatcher', () => {
     expect(m.match('com', 'domain')).toBe(false)
   })
 
-  it('is case-insensitive on both sides', () => {
+  // Entries come from upstream and are not guaranteed lowercase, so the
+  // matcher lowercases them at build time. The indicator is NOT lowercased
+  // here: parse.ts guarantees `normalized` is already lowercase, and
+  // re-normalizing on every call would be waste on a hot path.
+  it('lowercases its entries at build time', () => {
     const u = buildHostnameMatcher(['EXAMPLE.com'])
-    expect(u.match('A.Example.COM', 'domain')).toBe(true)
+    expect(u.match('a.example.com', 'domain')).toBe(true)
   })
 
   it('never matches IP indicators', () => {
@@ -68,8 +72,9 @@ describe('buildSubstringMatcher', () => {
     expect(m.match('example.com', 'domain')).toBe(false)
   })
 
-  it('is case-insensitive', () => {
-    expect(m.match('MY-SANDBOX.example.com', 'domain')).toBe(true)
+  it('lowercases its entries at build time', () => {
+    const s = buildSubstringMatcher(['SANDBOX'])
+    expect(s.match('my-sandbox.example.com', 'domain')).toBe(true)
   })
 })
 
