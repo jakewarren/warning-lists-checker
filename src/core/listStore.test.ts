@@ -170,4 +170,24 @@ describe('createListStore', () => {
     expect(res.lists.get('a')!.entries).toEqual(['10.0.0.0/8'])
     expect(res.failed).toEqual([])
   })
+
+  it('serves the in-memory fallback on the second load when IndexedDB is unavailable', async () => {
+    const brokenIdb = {
+      open: () => { throw new Error('SecurityError: private browsing') },
+    } as unknown as IDBFactory
+    let payload = ['10.0.0.0/8']
+    const fetchMock = vi.fn(async () => body(payload))
+    const store = createListStore({ fetch: fetchMock as never, idb: brokenIdb, now: () => now })
+
+    const res1 = await store.load([entry('a')])
+    expect(res1.lists.get('a')!.entries).toEqual(['10.0.0.0/8'])
+
+    now += FRESH_MS - 1
+    payload = ['192.168.0.0/16']
+
+    const res2 = await store.load([entry('a')])
+    // Still served from the in-memory fallback, not refetched.
+    expect(res2.lists.get('a')!.entries).toEqual(['10.0.0.0/8'])
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
 })

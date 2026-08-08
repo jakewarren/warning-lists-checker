@@ -63,8 +63,17 @@ function openDb(idb: IDBFactory): Promise<IDBDatabase | null> {
   })
 }
 
-async function readCached(db: IDBDatabase | null, name: string): Promise<CachedList | null> {
-  if (!db) return null
+async function readCached(
+  db: IDBDatabase | null,
+  memory: Map<string, CachedList>,
+  name: string,
+): Promise<CachedList | null> {
+  if (!db) {
+    // IndexedDB unavailable (private browsing, disabled storage) or over
+    // quota: fall back to an in-memory cache for the session rather than
+    // refetching every list on every load.
+    return memory.get(name) ?? null
+  }
   try {
     const tx = db.transaction(STORE, 'readonly')
     const got = await promisify(tx.objectStore(STORE).get(name) as IDBRequest<CachedList>)
@@ -76,8 +85,17 @@ async function readCached(db: IDBDatabase | null, name: string): Promise<CachedL
   }
 }
 
-async function writeCached(db: IDBDatabase | null, value: CachedList): Promise<void> {
-  if (!db) return
+async function writeCached(
+  db: IDBDatabase | null,
+  memory: Map<string, CachedList>,
+  value: CachedList,
+): Promise<void> {
+  if (!db) {
+    // Same in-memory fallback as readCached — a session-scoped cache, not a
+    // write-through layer, so this only runs when there is no real db.
+    memory.set(value.name, value)
+    return
+  }
   try {
     const tx = db.transaction(STORE, 'readwrite')
     await promisify(tx.objectStore(STORE).put(value) as unknown as IDBRequest<IDBValidKey>)
@@ -102,6 +120,10 @@ function isUpstreamList(v: unknown): v is UpstreamList {
 
 export function createListStore(deps: StoreDeps): ListStore {
   const { fetch: doFetch, idb, now } = deps
+  // Session-scoped fallback used only when IndexedDB is unavailable. Lives on
+  // the store instance so repeated load() calls on the same store still see
+  // the three-tier decay behavior even with zero persistence.
+  const memory = new Map<string, CachedList>()
 
   async function fetchList(name: string): Promise<CachedList> {
     const res = await doFetch(`${RAW_BASE}/${name}/list.json`)
@@ -115,7 +137,7 @@ export function createListStore(deps: StoreDeps): ListStore {
     db: IDBDatabase | null,
     entry: CatalogEntry,
   ): Promise<CachedList | null> {
-    const cached = await readCached(db, entry.name)
+    const cached = await readCached(db, memory, entry.name)
     const age = cached ? now() - cached.fetchedAt : Infinity
 
     if (cached && age < FRESH_MS) return cached
@@ -124,7 +146,7 @@ export function createListStore(deps: StoreDeps): ListStore {
       // Stale-while-revalidate: return now, refresh in the background. The
       // caller must not await this — that is the whole point of this tier.
       void fetchList(entry.name)
-        .then((fresh) => writeCached(db, fresh))
+        .then((fresh) => writeCached(db, memory, fresh))
         .catch(() => {
           // Background revalidation failed silently; the cached value we
           // already returned to the caller remains valid until next load.
@@ -134,7 +156,7 @@ export function createListStore(deps: StoreDeps): ListStore {
 
     try {
       const fresh = await fetchList(entry.name)
-      await writeCached(db, fresh)
+      await writeCached(db, memory, fresh)
       return fresh
     } catch (err) {
       // Never fail hard when we have something usable on disk.
