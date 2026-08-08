@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # Keeps the SHA-pinned actions above current. Dependabot rewrites both the
+  # SHA and its trailing version comment.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(actions)'
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      # This project has zero runtime dependencies, so every update is a
+      # devDependency; one grouped PR per week rather than five.
+      dev-dependencies:
+        patterns: ['*']
