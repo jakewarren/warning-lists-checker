@@ -167,7 +167,7 @@ correct as MISP evolves.
   original: string
   normalized: string
   type: 'ipv4' | 'ipv6' | 'domain' | 'url' | 'unparseable'
-  hits: Array<{ list: string, tier: Tier, description: string, version: string }>
+  hits: Array<{ list: string, tier: Tier, description: string, version: number }>
 }
 ```
 
