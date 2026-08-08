@@ -44,14 +44,13 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
 
   const client = createWorkerClient(worker)
   let report: MatchReport | null = null
-  let heavyLoaded = false
 
   function setExportsEnabled(on: boolean): void {
     for (const b of exportBtns) b.disabled = !on
   }
 
   async function loadLists(heavy: boolean): Promise<void> {
-    checkBtn.disabled = true
+    if (!heavy) checkBtn.disabled = true
     heavyBtn.disabled = true
     let coverage: Coverage
     try {
@@ -59,14 +58,24 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
         checkBtn.textContent = `Loading lists… ${done}/${total}`
       })
     } catch (err) {
-      coverageEl.innerHTML =
-        `<div class="coverage"><span class="cov-warn">Could not load any lists: ` +
-        `${(err as Error).message}. Checking is disabled until lists load.</span></div>`
-      checkBtn.textContent = 'Lists unavailable'
+      if (heavy) {
+        // Core lists are already loaded and usable — an optional-tier
+        // failure must not take down a working tool.
+        coverageEl.innerHTML =
+          `<div class="coverage"><span class="cov-warn">Could not load the popularity ` +
+          `lists: ${(err as Error).message}. Checking will continue without them.</span></div>`
+        checkBtn.textContent = 'Check indicators'
+        checkBtn.disabled = false
+        heavyBtn.disabled = false
+      } else {
+        coverageEl.innerHTML =
+          `<div class="coverage"><span class="cov-warn">Could not load any lists: ` +
+          `${(err as Error).message}. Checking is disabled until lists load.</span></div>`
+        checkBtn.textContent = 'Lists unavailable'
+      }
       return
     }
 
-    heavyLoaded = heavy
     checkBtn.textContent = 'Check indicators'
     checkBtn.disabled = false
     heavyBtn.disabled = heavy
@@ -92,7 +101,7 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
   heavyBtn.addEventListener('click', () => void loadLists(true))
 
   input.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') void runCheck()
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter' && !checkBtn.disabled) void runCheck()
   })
 
   $<HTMLButtonElement>('copy-tsv').addEventListener('click', () => {
@@ -108,5 +117,5 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
     if (report) download('warninglist-check.json', 'application/json', toJson(report))
   })
 
-  void loadLists(heavyLoaded)
+  void loadLists(false)
 }
