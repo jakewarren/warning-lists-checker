@@ -50,7 +50,7 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
   }
 
   async function loadLists(heavy: boolean): Promise<void> {
-    if (!heavy) checkBtn.disabled = true
+    checkBtn.disabled = true
     heavyBtn.disabled = true
     let coverage: Coverage
     try {
