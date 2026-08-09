@@ -18,7 +18,7 @@
 - **All matching runs inside the Web Worker.** Modules under `src/core/` must not reference `window`, `document`, or any DOM API, so they stay unit-testable under Node.
 - **`version` from upstream is a `number`, not a string** (observed values: `5`, `27`, `20250115`, `20260709`). The spec's `Result` sketch says string; number is correct.
 - **The word "clean" is reserved for full coverage.** When any in-scope list failed to load, zero-hit indicators must be labeled `no hits (N/M lists)` instead.
-- **Node 20+** for the toolchain.
+- **Node 20.19+ or 22.12+** for the toolchain (Node 20 reached EOL in April 2026; CI runs 24 LTS).
 - **Vite `base` must be `'./'`** so the build works from a GitHub Pages project subpath.
 - **CI supply-chain hardening.** Every GitHub Action is pinned to a full commit
   SHA with a trailing **exact-version** comment (`# v2.20.1`, not `# v2`), never
@@ -3468,7 +3468,7 @@ jobs:
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '20'
+          node-version: '24'
           cache: npm
 
       - run: npm ci
@@ -3528,7 +3528,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '20'
+          node-version: '24'
           cache: npm
       - run: npm ci
 
