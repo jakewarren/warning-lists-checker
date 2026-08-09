@@ -32,7 +32,12 @@ button {
   font: inherit; font-size: .8125rem; padding: .4rem .8rem; cursor: pointer;
   background: var(--bg); color: var(--fg);
   border: 1px solid var(--line); border-radius: .375rem;
+  display: inline-flex; align-items: center; gap: .4rem;
 }
+
+/* Decorative action icons. flex-shrink guards the icon when the toolbar wraps
+   on narrow viewports; the label truncates before the icon does. */
+button .icon { width: 1em; height: 1em; flex: 0 0 auto; }
 button.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 button:disabled { opacity: .5; cursor: default; }
 

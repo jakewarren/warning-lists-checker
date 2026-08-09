@@ -9,6 +9,24 @@ const heavyBytes = catalog
   .filter((e) => e.loadTier === 'heavy')
   .reduce((n, e) => n + e.bytes, 0)
 
+// Inline SVG rather than an icon font or library — this project ships zero
+// runtime dependencies. Both are 16x16 on a 24-unit grid, stroked with
+// currentColor so they inherit the button's colour in light and dark themes
+// and dim correctly with :disabled. Decorative only: the button text carries
+// the meaning, so they are aria-hidden.
+const ICON_COPY = `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="9" y="9" width="11" height="11" rx="2"/>
+  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+</svg>`
+
+const ICON_DOWNLOAD = `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+  <polyline points="7 10 12 15 17 10"/>
+  <line x1="12" y1="15" x2="12" y2="3"/>
+</svg>`
+
 const SHELL = `
   <h1>MISP Warninglists Checker</h1>
   <p class="sub">Paste IPs, domains or URLs. Everything is matched in your browser —
@@ -18,10 +36,10 @@ const SHELL = `
   <div class="toolbar">
     <button id="check" class="primary" disabled>Loading lists…</button>
     <button id="load-heavy">Add popularity lists (${Math.round(heavyBytes / 1e6)} MB)</button>
-    <button id="copy-tsv" disabled>Copy TSV</button>
-    <button id="copy-clean" disabled>Copy clean only</button>
-    <button id="dl-csv" disabled>CSV</button>
-    <button id="dl-json" disabled>JSON</button>
+    <button id="copy-tsv" disabled>${ICON_COPY}Copy TSV</button>
+    <button id="copy-clean" disabled>${ICON_COPY}Copy clean only</button>
+    <button id="dl-csv" disabled>${ICON_DOWNLOAD}CSV</button>
+    <button id="dl-json" disabled>${ICON_DOWNLOAD}JSON</button>
   </div>
   <div id="coverage"></div>
   <div id="results"></div>
