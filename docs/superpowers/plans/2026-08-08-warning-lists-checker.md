@@ -21,7 +21,10 @@
 - **Node 20+** for the toolchain.
 - **Vite `base` must be `'./'`** so the build works from a GitHub Pages project subpath.
 - **CI supply-chain hardening.** Every GitHub Action is pinned to a full commit
-  SHA with a trailing `# vN` comment, never a moving tag. Every workflow job
+  SHA with a trailing **exact-version** comment (`# v2.20.1`, not `# v2`), never
+  a moving tag. The comment is the only human-readable signal of what a pin
+  actually is, and Dependabot writes exact versions when it bumps one, so a
+  bare major like `# v2` makes drift invisible. Every workflow job
   begins with a `step-security/harden-runner` step. Workflow-level `permissions`
   is `{}` and each job declares its own minimum. Dependabot keeps both the
   action SHAs and the npm devDependencies current.
@@ -2855,7 +2858,7 @@ export const TIER_META: Record<Tier, { label: string; caption: string; order: nu
   },
   popularity: {
     label: 'High-traffic site (informational)',
-    caption: 'Ranked by traffic alone — popular does not mean safe. These lists contain malicious infrastructure.',
+    caption: 'Ranked by traffic alone — popular does not mean safe. These lists can contain malicious infrastructure.',
     order: 3,
   },
   neutral: {
@@ -3454,16 +3457,16 @@ jobs:
       contents: read
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
         with:
           # Start in audit so the first runs record real egress. Once the
           # Insights page shows a stable endpoint set, switch to `block` and
           # add an allowed-endpoints list.
           egress-policy: audit
 
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '20'
           cache: npm
@@ -3472,8 +3475,8 @@ jobs:
       - run: npm test
       - run: npm run build
 
-      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: dist
 
@@ -3488,12 +3491,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
         with:
           egress-policy: audit
 
       - id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
 ```
 
 - [ ] **Step 6: Create `.github/workflows/catalog-drift.yml`**
@@ -3518,12 +3521,12 @@ jobs:
       issues: write
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '20'
           cache: npm
@@ -3552,7 +3555,7 @@ jobs:
 
       - name: Open an issue
         if: steps.diff.outputs.drift == 'true'
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
             const body = process.env.BODY

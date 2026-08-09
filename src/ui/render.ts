@@ -19,7 +19,7 @@ export const TIER_META: Record<Tier, { label: string; caption: string; order: nu
   },
   popularity: {
     label: 'High-traffic site (informational)',
-    caption: 'Ranked by traffic alone — popular does not mean safe. These lists contain malicious infrastructure.',
+    caption: 'Ranked by traffic alone — popular does not mean safe. These lists can contain malicious infrastructure.',
     order: 3,
   },
   neutral: {

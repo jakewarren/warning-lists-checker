@@ -92,9 +92,6 @@ If you find this useful, the credit belongs upstream. Consider
 [contributing a list or a correction](https://github.com/MISP/misp-warninglists) to MISP
 rather than here.
 
-The GitHub mark is a trademark of GitHub, Inc., used here only to link to this
-project's repository.
-
 ## License
 
 The code in this repository is [MIT licensed](LICENSE).
@@ -102,5 +99,4 @@ The code in this repository is [MIT licensed](LICENSE).
 **That covers this application only, not the warninglist data.** The lists are fetched
 live from [MISP/misp-warninglists](https://github.com/MISP/misp-warninglists) at runtime
 and no copy of them is bundled or redistributed here — `src/catalog.json` holds only list
-names and metadata, never list contents. Upstream ships no LICENSE file, so if you intend
-to redistribute the list data itself, check with the MISP project first.
+names and metadata, not list contents.
