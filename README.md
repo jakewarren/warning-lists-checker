@@ -76,7 +76,7 @@ npm run build          # typecheck + production build
 npm run build:catalog  # regenerate src/catalog.json from upstream
 ```
 
-`npm run build:catalog` walks the upstream repository and rewrites the catalog. A weekly
+`npm run build:catalog` walks the upstream repository and rewrites the catalog. A monthly
 CI job diffs upstream against it and opens an issue when MISP adds a list, so the shipped
 catalog does not quietly fall behind.
 

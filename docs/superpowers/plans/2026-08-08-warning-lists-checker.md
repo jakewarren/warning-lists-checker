@@ -3508,7 +3508,7 @@ name: Catalog drift check
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 1 * *'
   workflow_dispatch:
 
 permissions: {}
@@ -3593,7 +3593,7 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: 'chore(actions)'
     groups:
@@ -3603,7 +3603,7 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: 'chore(deps)'
     groups:
