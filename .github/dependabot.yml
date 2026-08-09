@@ -1,25 +1,36 @@
 version: 2
 updates:
-  # Keeps the SHA-pinned actions above current. Dependabot rewrites both the
-  # SHA and its trailing version comment.
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
-      prefix: 'chore(actions)'
+      prefix: "chore(actions)"
+    # Only allow security updates by disabling version updates.
+    # Security updates ignore this limit, so advisories still open a PR.
+    open-pull-requests-limit: 0
+    # Wait for major releases to stabilize (skips an initial .0 if .1 follows
+    # quickly). Applies to version updates only — security updates are never
+    # held back.
+    cooldown:
+      semver-major-days: 14
     groups:
+      # Inert while the limit is 0; kept so re-enabling version updates gives
+      # one PR rather than seven.
       actions:
-        patterns: ['*']
+        patterns: ["*"]
 
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
-      prefix: 'chore(deps)'
+      prefix: "chore(deps)"
+    open-pull-requests-limit: 0
+    cooldown:
+      semver-major-days: 14
     groups:
       # This project has zero runtime dependencies, so every update is a
-      # devDependency; one grouped PR per week rather than five.
+      # devDependency; one grouped PR rather than several.
       dev-dependencies:
-        patterns: ['*']
+        patterns: ["*"]
