@@ -1,7 +1,7 @@
 import catalogJson from '../catalog.json'
 import type { CatalogEntry, Coverage, MatchReport } from '../core/types'
 import { cleanOnly, download, toCsv, toJson, toTsv } from './export'
-import { renderCoverage, renderResults } from './render'
+import { esc, renderCoverage, renderResults } from './render'
 import { createWorkerClient } from './workerClient'
 
 const catalog = catalogJson as CatalogEntry[]
@@ -44,12 +44,17 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
 
   const client = createWorkerClient(worker)
   let report: MatchReport | null = null
+  // Tracked explicitly rather than read back off checkBtn.disabled, which
+  // runCheck also owns — inferring load state from that bit is what let a
+  // finished check re-enable the button in the middle of a list load.
+  let loading = false
 
   function setExportsEnabled(on: boolean): void {
     for (const b of exportBtns) b.disabled = !on
   }
 
   async function loadLists(heavy: boolean): Promise<void> {
+    loading = true
     checkBtn.disabled = true
     heavyBtn.disabled = true
     let coverage: Coverage
@@ -58,24 +63,26 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
         checkBtn.textContent = `Loading lists… ${done}/${total}`
       })
     } catch (err) {
+      loading = false
       if (heavy) {
         // Core lists are already loaded and usable — an optional-tier
         // failure must not take down a working tool.
         coverageEl.innerHTML =
           `<div class="coverage"><span class="cov-warn">Could not load the popularity ` +
-          `lists: ${(err as Error).message}. Checking will continue without them.</span></div>`
+          `lists: ${esc((err as Error).message)}. Checking will continue without them.</span></div>`
         checkBtn.textContent = 'Check indicators'
         checkBtn.disabled = false
         heavyBtn.disabled = false
       } else {
         coverageEl.innerHTML =
           `<div class="coverage"><span class="cov-warn">Could not load any lists: ` +
-          `${(err as Error).message}. Checking is disabled until lists load.</span></div>`
+          `${esc((err as Error).message)}. Checking is disabled until lists load.</span></div>`
         checkBtn.textContent = 'Lists unavailable'
       }
       return
     }
 
+    loading = false
     checkBtn.textContent = 'Check indicators'
     checkBtn.disabled = false
     heavyBtn.disabled = heavy
@@ -92,13 +99,21 @@ export function mountApp(root: HTMLElement, worker: Worker): void {
       coverageEl.innerHTML = renderCoverage(report.coverage)
       setExportsEnabled(report.results.length > 0)
     } finally {
-      checkBtn.disabled = false
-      checkBtn.textContent = 'Check indicators'
+      // A load started while this check was in flight owns the button now;
+      // restoring it here would re-enable it mid-load and stomp its label.
+      if (!loading) {
+        checkBtn.disabled = false
+        checkBtn.textContent = 'Check indicators'
+      }
     }
   }
 
   checkBtn.addEventListener('click', () => void runCheck())
   heavyBtn.addEventListener('click', () => void loadLists(true))
+
+  // The held report describes the previous input; once the text changes it is
+  // stale, and exporting it would put the last batch's verdicts in a ticket.
+  input.addEventListener('input', () => setExportsEnabled(false))
 
   input.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'Enter' && !checkBtn.disabled) void runCheck()

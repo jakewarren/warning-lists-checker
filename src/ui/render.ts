@@ -31,7 +31,7 @@ export const TIER_META: Record<Tier, { label: string; caption: string; order: nu
 
 const DAY_MS = 24 * 60 * 60 * 1000
 
-function esc(s: string): string {
+export function esc(s: string): string {
   return s
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -105,12 +105,15 @@ function renderHits(r: IndicatorResult, coverage: Coverage): string {
 
 export function renderResults(report: MatchReport): string {
   const rows = report.results
-    .map(
-      (r) =>
+    .map((r) => {
+      // Only shown when lines were folded away, so the common case stays quiet.
+      const dupes = r.count > 1 ? ` <span class="ind-count">×${r.count}</span>` : ''
+      return (
         `<tr><td class="ind"><code>${esc(r.original)}</code>` +
-        `<span class="ind-type">${esc(r.type)}</span></td>` +
-        `<td class="res">${renderHits(r, report.coverage)}</td></tr>`,
-    )
+        `<span class="ind-type">${esc(r.type)}${dupes}</span></td>` +
+        `<td class="res">${renderHits(r, report.coverage)}</td></tr>`
+      )
+    })
     .join('')
 
   const table = report.results.length

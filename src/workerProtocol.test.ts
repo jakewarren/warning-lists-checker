@@ -73,7 +73,7 @@ describe('createWorkerClient', () => {
     const reportFor = (id: number, normalized: string): WorkerResponse => ({
       id, kind: 'report',
       report: {
-        results: [{ original: normalized, normalized, type: 'domain', hits: [] }],
+        results: [{ original: normalized, normalized, type: 'domain', count: 1, hits: [] }],
         unparseable: [], coverage: COVERAGE,
       },
     })

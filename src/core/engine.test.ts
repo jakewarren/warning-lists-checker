@@ -80,6 +80,33 @@ describe('engine.run', () => {
     expect(rep.results[0]!.hits.map((h) => h.list)).toEqual(['dynamic-dns'])
   })
 
+  it('consults CIDR lists for an IP-literal URL instead of calling it clean', () => {
+    const e = engineWith([['cloudflare', ['1.1.1.0/24']]])
+    const rep = e.run('http://1.1.1.1/payload.exe', FULL)
+    expect(rep.results[0]!.type).toBe('ipv4')
+    expect(rep.results[0]!.hits.map((h) => h.list)).toEqual(['cloudflare'])
+  })
+
+  it('consults CIDR lists for a defanged IP-literal URL', () => {
+    const e = engineWith([['cloudflare', ['185.220.101.0/24']]])
+    const rep = e.run('hxxps://185[.]220[.]101[.]5/x', FULL)
+    expect(rep.results[0]!.hits.map((h) => h.list)).toEqual(['cloudflare'])
+  })
+
+  it('does not fold a bare IP into a same-host URL and lose its hits', () => {
+    const e = engineWith([['cloudflare', ['1.1.1.0/24']]])
+    const rep = e.run('http://1.1.1.1/x\n1.1.1.1', FULL)
+    expect(rep.results).toHaveLength(1)
+    expect(rep.results[0]!.count).toBe(2)
+    expect(rep.results[0]!.hits.map((h) => h.list)).toEqual(['cloudflare'])
+  })
+
+  it('surfaces how many input lines collapsed into each result', () => {
+    const e = engineWith([])
+    const rep = e.run('8.8.8.8\n8.8.8.8\n1.1.1.1', FULL)
+    expect(rep.results.map((r) => r.count)).toEqual([2, 1])
+  })
+
   it('passes unparseable lines through to the report', () => {
     const e = engineWith([])
     const rep = e.run('8.8.8.8\nd41d8cd98f00b204e9800998ecf8427e', FULL)

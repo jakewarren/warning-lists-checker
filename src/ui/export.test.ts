@@ -15,14 +15,14 @@ const REPORT: MatchReport = {
   unparseable: ['junk'],
   results: [
     {
-      original: '1.1.1.1', normalized: '1.1.1.1', type: 'ipv4',
+      original: '1.1.1.1', normalized: '1.1.1.1', type: 'ipv4', count: 1,
       hits: [
         { list: 'cloudflare', title: 'CF', description: 'd', tier: 'infrastructure', version: 1 },
         { list: 'public-dns-v4', title: 'DNS', description: 'd', tier: 'infrastructure', version: 2 },
       ],
     },
-    { original: '9.9.9.9', normalized: '9.9.9.9', type: 'ipv4', hits: [] },
-    { original: 'evil.test', normalized: 'evil.test', type: 'domain', hits: [] },
+    { original: '9.9.9.9', normalized: '9.9.9.9', type: 'ipv4', count: 1, hits: [] },
+    { original: 'evil.test', normalized: 'evil.test', type: 'domain', count: 1, hits: [] },
   ],
 }
 
@@ -33,7 +33,16 @@ describe('toTsv', () => {
 
   it('emits a tab-separated column header', () => {
     const header = toTsv(REPORT).split('\n')[1]!
-    expect(header.split('\t')).toEqual(['indicator', 'type', 'verdict', 'lists', 'tiers'])
+    expect(header.split('\t')).toEqual(['indicator', 'type', 'count', 'verdict', 'lists', 'tiers'])
+  })
+
+  it('reports how many input lines folded into a row', () => {
+    const r: MatchReport = {
+      ...REPORT,
+      results: [{ original: 'a.test', normalized: 'a.test', type: 'domain', count: 4, hits: [] }],
+    }
+    const row = toTsv(r).split('\n').find((l) => l.startsWith('a.test'))!
+    expect(row.split('\t')[2]).toBe('4')
   })
 
   it('joins multiple list hits in one cell', () => {
@@ -43,17 +52,23 @@ describe('toTsv', () => {
 
   it('writes clean for zero hits at full coverage', () => {
     const row = toTsv(REPORT).split('\n').find((l) => l.startsWith('9.9.9.9'))!
-    expect(row.split('\t')[2]).toBe('clean')
+    expect(row.split('\t')[3]).toBe('clean')
   })
 
   it('writes the degraded verdict when coverage is incomplete', () => {
     const row = toTsv({ ...REPORT, coverage: DEGRADED })
       .split('\n').find((l) => l.startsWith('9.9.9.9'))!
-    expect(row.split('\t')[2]).toBe('no hits (119/121 lists)')
+    expect(row.split('\t')[3]).toBe('no hits (119/121 lists)')
   })
 })
 
 describe('toCsv', () => {
+  it('carries the same columns as the TSV, including count', () => {
+    expect(toCsv(REPORT).split('\n')[1]).toBe('indicator,type,count,verdict,lists,tiers')
+    expect(toCsv(REPORT).split('\n')[1]!.split(','))
+      .toEqual(toTsv(REPORT).split('\n')[1]!.split('\t'))
+  })
+
   it('quotes fields containing commas', () => {
     const row = toCsv(REPORT).split('\n').find((l) => l.startsWith('1.1.1.1'))!
     expect(row).toContain('"cloudflare,public-dns-v4"')
@@ -62,7 +77,7 @@ describe('toCsv', () => {
   it('escapes embedded double quotes by doubling them', () => {
     const r: MatchReport = {
       ...REPORT,
-      results: [{ original: 'a"b.com', normalized: 'a"b.com', type: 'domain', hits: [] }],
+      results: [{ original: 'a"b.com', normalized: 'a"b.com', type: 'domain', count: 1, hits: [] }],
     }
     expect(toCsv(r)).toContain('"a""b.com"')
   })
@@ -70,7 +85,7 @@ describe('toCsv', () => {
   it('quotes fields containing a carriage return', () => {
     const r: MatchReport = {
       ...REPORT,
-      results: [{ original: 'a\rb.com', normalized: 'a\rb.com', type: 'domain', hits: [] }],
+      results: [{ original: 'a\rb.com', normalized: 'a\rb.com', type: 'domain', count: 1, hits: [] }],
     }
     expect(toCsv(r)).toContain('"a\rb.com"')
   })
@@ -78,7 +93,7 @@ describe('toCsv', () => {
   it('quotes fields containing a line feed', () => {
     const r: MatchReport = {
       ...REPORT,
-      results: [{ original: 'a\nb.com', normalized: 'a\nb.com', type: 'domain', hits: [] }],
+      results: [{ original: 'a\nb.com', normalized: 'a\nb.com', type: 'domain', count: 1, hits: [] }],
     }
     expect(toCsv(r)).toContain('"a\nb.com"')
   })

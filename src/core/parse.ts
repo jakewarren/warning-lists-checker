@@ -32,7 +32,12 @@ function isIpv6(s: string): boolean {
   if (doubles && doubles.length > 1) return false
   const groups = s.split(':').filter((g) => g.length > 0)
   if (groups.length > 8) return false
-  return groups.every((g) => /^[0-9a-f]{1,4}$/i.test(g) || isIpv4(g))
+  // An embedded IPv4 group is only legal as the *final* group ("::ffff:1.2.3.4").
+  // Without the position check, un-port-stripped input like "8.8.8.8:53" would
+  // read as IPv6 — which matters now that classify() runs on hosts pulled out
+  // of URLs, not just on already-port-stripped tokens.
+  return groups.every((g, i) =>
+    /^[0-9a-f]{1,4}$/i.test(g) || (isIpv4(g) && i === groups.length - 1))
 }
 
 export function classify(s: string): IndicatorType {
@@ -103,7 +108,7 @@ export function parseInput(raw: string): {
     // (which have more than one colon) pass through untouched here and are
     // resolved to a hostname below instead.
     const candidate = stripPort(refanged)
-    const type = classify(candidate)
+    let type = classify(candidate)
 
     if (type === 'unparseable') {
       unparseable.push(token)
@@ -118,6 +123,15 @@ export function parseInput(raw: string): {
         continue
       }
       normalized = host
+      // Re-derive the type from the host we actually match on. A URL is only a
+      // carrier: "http://1.1.1.1/x" reduces to an IP literal, and if the type
+      // stayed 'url' it would be excluded from every CIDR list by both
+      // appliesTo() and the CIDR matcher — consulted against nothing, and so
+      // reported with the reserved word "clean" at full coverage. Re-deriving
+      // also keeps dedupe consistent: a URL and a bare IP for the same host
+      // collapse into one indicator with one correct type.
+      const hostType = classify(host)
+      type = hostType === 'unparseable' ? 'url' : hostType
     } else {
       normalized = candidate.toLowerCase()
     }

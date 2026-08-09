@@ -50,7 +50,7 @@ describe('renderCoverage', () => {
 describe('renderResults', () => {
   it('labels a zero-hit indicator clean at full coverage', () => {
     const html = renderResults(report({
-      results: [{ original: '8.8.8.8', normalized: '8.8.8.8', type: 'ipv4', hits: [] }],
+      results: [{ original: '8.8.8.8', normalized: '8.8.8.8', type: 'ipv4', count: 1, hits: [] }],
     }))
     expect(html).toContain('clean')
     expect(html).not.toContain('no hits (')
@@ -59,7 +59,7 @@ describe('renderResults', () => {
   it('refuses to say clean when coverage is degraded', () => {
     const html = renderResults(report({
       coverage: DEGRADED,
-      results: [{ original: '8.8.8.8', normalized: '8.8.8.8', type: 'ipv4', hits: [] }],
+      results: [{ original: '8.8.8.8', normalized: '8.8.8.8', type: 'ipv4', count: 1, hits: [] }],
     }))
     expect(html).toContain('no hits (119/121 lists)')
     expect(html).not.toMatch(/>\s*clean\s*</)
@@ -68,7 +68,7 @@ describe('renderResults', () => {
   it('renders every hit, grouped by tier', () => {
     const html = renderResults(report({
       results: [{
-        original: '1.1.1.1', normalized: '1.1.1.1', type: 'ipv4',
+        original: '1.1.1.1', normalized: '1.1.1.1', type: 'ipv4', count: 1,
         hits: [
           { list: 'cloudflare', title: 'CF', description: 'd', tier: 'infrastructure', version: 1 },
           { list: 'tranco', title: 'Tranco', description: 'd', tier: 'popularity', version: 2 },
@@ -85,11 +85,25 @@ describe('renderResults', () => {
     const html = renderResults(report({
       results: [{
         original: '<img src=x onerror=alert(1)>', normalized: 'x.com',
-        type: 'domain', hits: [],
+        type: 'domain', count: 1, hits: [],
       }],
     }))
     expect(html).not.toContain('<img')
     expect(html).toContain('&lt;img')
+  })
+
+  it('shows a multiplier when input lines were folded into one row', () => {
+    const html = renderResults(report({
+      results: [{ original: 'a.test', normalized: 'a.test', type: 'domain', count: 3, hits: [] }],
+    }))
+    expect(html).toContain('×3')
+  })
+
+  it('stays uncluttered for a single occurrence', () => {
+    const html = renderResults(report({
+      results: [{ original: 'a.test', normalized: 'a.test', type: 'domain', count: 1, hits: [] }],
+    }))
+    expect(html).not.toContain('×')
   })
 
   it('lists unparseable input in its own section', () => {

@@ -14,18 +14,31 @@ function verdict(r: MatchReport['results'][number], c: Coverage): string {
   return r.hits.length === 0 ? coverageLabel(c) : `${r.hits.length} hit(s)`
 }
 
-export function toTsv(report: MatchReport): string {
-  const lines = [header(report.coverage), ['indicator', 'type', 'verdict', 'lists', 'tiers'].join('\t')]
-  for (const r of report.results) {
-    lines.push([
+const COLUMNS = ['indicator', 'type', 'count', 'verdict', 'lists', 'tiers']
+
+/**
+ * Column header plus one row per result, shared by every delimited format so a
+ * new column cannot land in one export and be forgotten in the other.
+ */
+function rows(report: MatchReport): string[][] {
+  return [
+    COLUMNS,
+    ...report.results.map((r) => [
       r.original,
       r.type,
+      String(r.count),
       verdict(r, report.coverage),
       r.hits.map((h) => h.list).join(','),
       [...new Set(r.hits.map((h) => h.tier))].join(','),
-    ].join('\t'))
-  }
-  return lines.join('\n')
+    ]),
+  ]
+}
+
+export function toTsv(report: MatchReport): string {
+  return [
+    header(report.coverage),
+    ...rows(report).map((cells) => cells.join('\t')),
+  ].join('\n')
 }
 
 function csvCell(s: string): string {
@@ -33,17 +46,10 @@ function csvCell(s: string): string {
 }
 
 export function toCsv(report: MatchReport): string {
-  const lines = [header(report.coverage), ['indicator', 'type', 'verdict', 'lists', 'tiers'].join(',')]
-  for (const r of report.results) {
-    lines.push([
-      r.original,
-      r.type,
-      verdict(r, report.coverage),
-      r.hits.map((h) => h.list).join(','),
-      [...new Set(r.hits.map((h) => h.tier))].join(','),
-    ].map(csvCell).join(','))
-  }
-  return lines.join('\n')
+  return [
+    header(report.coverage),
+    ...rows(report).map((cells) => cells.map(csvCell).join(',')),
+  ].join('\n')
 }
 
 export function toJson(report: MatchReport): string {

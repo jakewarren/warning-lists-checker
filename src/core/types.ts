@@ -41,6 +41,12 @@ export interface IndicatorResult {
   original: string
   normalized: string
   type: IndicatorType
+  /**
+   * How many input lines collapsed into this row. Surfaced in the UI and in
+   * exports so folded-away duplicates (several URLs sharing one host) are
+   * visible rather than silently dropped.
+   */
+  count: number
   hits: Hit[]
 }
 

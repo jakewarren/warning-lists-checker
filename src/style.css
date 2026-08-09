@@ -44,6 +44,7 @@ button:disabled { opacity: .5; cursor: default; }
 .ind { width: 34%; }
 .ind code { font-size: .8125rem; word-break: break-all; }
 .ind-type { display: block; font-size: .6875rem; color: var(--muted); margin-top: .15rem; }
+.ind-count { font-weight: 600; }
 
 .verdict { font-size: .8125rem; font-weight: 600; }
 .verdict.clean { color: var(--fp); }

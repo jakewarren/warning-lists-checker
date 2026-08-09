@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import { parseInput, refang, classify } from './parse'
+import { appliesTo } from './applicability'
+import type { CatalogEntry } from './types'
+
+const HOST_LIST: CatalogEntry = {
+  name: 'dynamic-dns', title: 'Dynamic DNS', description: 'd', type: 'hostname',
+  matchingAttributes: ['domain', 'hostname'], tier: 'context', loadTier: 'core', bytes: 0,
+}
 
 describe('refang', () => {
   it('restores bracketed and braced dots', () => {
@@ -63,6 +70,16 @@ describe('classify', () => {
     expect(classify('not a domain!')).toBe('unparseable')
     expect(classify('')).toBe('unparseable')
   })
+
+  it('does not read a host:port as IPv6 just because a group parses as IPv4', () => {
+    expect(classify('8.8.8.8:53')).not.toBe('ipv6')
+    expect(classify('1.2.3.4:8080')).not.toBe('ipv6')
+  })
+
+  it('still accepts an embedded IPv4 in the final group', () => {
+    expect(classify('::ffff:192.168.0.1')).toBe('ipv6')
+    expect(classify('64:ff9b::8.8.8.8')).toBe('ipv6')
+  })
 })
 
 describe('parseInput', () => {
@@ -75,8 +92,42 @@ describe('parseInput', () => {
 
   it('refangs before classifying', () => {
     const { indicators } = parseInput('hxxps://evil[.]com/payload')
-    expect(indicators[0]!.type).toBe('url')
+    // The type follows the host the matchers actually see, so a URL carrying a
+    // hostname is typed 'domain' — host-type lists apply to both identically.
+    expect(indicators[0]!.type).toBe('domain')
     expect(indicators[0]!.normalized).toBe('evil.com')
+  })
+
+  it('types an IPv4-literal URL as ipv4 so CIDR lists are consulted', () => {
+    const { indicators } = parseInput('http://8.8.8.8/x')
+    expect(indicators[0]!.type).toBe('ipv4')
+    expect(indicators[0]!.normalized).toBe('8.8.8.8')
+    expect(indicators[0]!.original).toBe('http://8.8.8.8/x')
+  })
+
+  it('types a defanged IPv4-literal URL as ipv4', () => {
+    const { indicators } = parseInput('hxxps://185[.]220[.]101[.]5/x')
+    expect(indicators[0]!.type).toBe('ipv4')
+    expect(indicators[0]!.normalized).toBe('185.220.101.5')
+  })
+
+  it('types a bracketed IPv6-literal URL as ipv6', () => {
+    const { indicators } = parseInput('https://[2001:db8::1]/a')
+    expect(indicators[0]!.type).toBe('ipv6')
+    expect(indicators[0]!.normalized).toBe('2001:db8::1')
+  })
+
+  it('keeps a hostname URL host-like', () => {
+    const { indicators } = parseInput('https://example.com/a')
+    expect(indicators[0]!.type).toBe('domain')
+    expect(appliesTo(HOST_LIST, indicators[0]!.type)).toBe(true)
+  })
+
+  it('merges a URL and a bare IP of the same host under the ip type', () => {
+    const { indicators } = parseInput('http://1.1.1.1/x\n1.1.1.1')
+    expect(indicators).toHaveLength(1)
+    expect(indicators[0]!.type).toBe('ipv4')
+    expect(indicators[0]!.count).toBe(2)
   })
 
   it('preserves the original text exactly as pasted', () => {

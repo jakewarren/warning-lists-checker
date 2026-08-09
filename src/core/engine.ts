@@ -67,6 +67,7 @@ export function createEngine(catalog: CatalogEntry[]): Engine {
           original: ind.original,
           normalized: ind.normalized,
           type: ind.type,
+          count: ind.count,
           hits,
         }
       })
