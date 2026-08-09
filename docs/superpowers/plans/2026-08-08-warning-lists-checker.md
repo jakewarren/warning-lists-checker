@@ -2714,7 +2714,7 @@ git commit -m "feat: add web worker and typed request/response protocol"
 - Consumes: `MatchReport`, `IndicatorResult`, `Tier`, `Coverage` from `../core/types`; `coverageLabel` from `../core/engine`.
 - Produces: `renderCoverage(c: Coverage): string`, `renderResults(report: MatchReport): string`, `TIER_META: Record<Tier, { label: string; caption: string; order: number }>`. All return HTML strings; the caller assigns to `innerHTML`.
 
-Tier captions carry the spec's two warnings — popularity is not benignness, and context means look closer rather than dismiss.
+Tier captions carry the spec's two warnings — popular does not mean safe, and context means look closer rather than dismiss.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -2737,8 +2737,8 @@ function report(over: Partial<MatchReport> = {}): MatchReport {
 }
 
 describe('TIER_META', () => {
-  it('warns that popularity is not benignness', () => {
-    expect(TIER_META.popularity.caption.toLowerCase()).toContain('not benignness')
+  it('warns that popular does not mean safe', () => {
+    expect(TIER_META.popularity.caption.toLowerCase()).toContain('does not mean safe')
   })
 
   it('frames context hits as a reason to look closer', () => {
@@ -2855,7 +2855,7 @@ export const TIER_META: Record<Tier, { label: string; caption: string; order: nu
   },
   popularity: {
     label: 'High-traffic site (informational)',
-    caption: 'Ranked by traffic, not safety — popularity is not benignness. These lists contain malicious infrastructure.',
+    caption: 'Ranked by traffic alone — popular does not mean safe. These lists contain malicious infrastructure.',
     order: 3,
   },
   neutral: {
@@ -3634,7 +3634,7 @@ Everything runs in the browser. Indicators you paste are never sent anywhere.
 Hits are grouped into tiers, and two of them are easy to misread:
 
 - **High-traffic site** is informational only. These lists rank by traffic, not safety,
-  and contain plenty of malicious infrastructure. Popularity is not benignness.
+  and contain plenty of malicious infrastructure. Popular does not mean safe.
 - **Context — look closer** (dynamic DNS, VPN ranges, Tor exits, scanners) is a reason
   to investigate further, not to dismiss.
 

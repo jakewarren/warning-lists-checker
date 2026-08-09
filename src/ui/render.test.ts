@@ -15,8 +15,8 @@ function report(over: Partial<MatchReport> = {}): MatchReport {
 }
 
 describe('TIER_META', () => {
-  it('warns that popularity is not benignness', () => {
-    expect(TIER_META.popularity.caption.toLowerCase()).toContain('not benignness')
+  it('warns that popular does not mean safe', () => {
+    expect(TIER_META.popularity.caption.toLowerCase()).toContain('does not mean safe')
   })
 
   it('frames context hits as a reason to look closer', () => {

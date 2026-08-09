@@ -191,10 +191,10 @@ grouped into four tiers, rendered differently:
 
 Two tiers carry deliberate wording:
 
-**Popularity is not benignness.** These lists rank by traffic, not safety, and the raw
+**Popular does not mean safe.** These lists rank by traffic, not safety, and the raw
 data contains abundant malicious infrastructure — `1337x.to`, `9anime.to`, dozens of
 gambling domains, `*.x.yupoo.com` counterfeit storefronts, `0000000000.download`. The
-UI labels these "high-traffic site — popularity is not benignness" and never styles
+UI labels these "high-traffic site — popular does not mean safe" and never styles
 them like an allowlist. `tranco`'s snapshot is also stale (`version: 20250115`, ~19
 months old at time of writing) versus `crux` (`20260709`).
 

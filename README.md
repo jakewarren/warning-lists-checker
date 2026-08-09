@@ -19,7 +19,7 @@ a front-end for it — paste, scan, move on to what actually matters.
 
 - **IPs, domains and URLs**, IPv4 and IPv6. URLs are reduced to the host that gets matched.
 - **Defanged input works.** `hxxps://evil[.]com/x`, `1.1.1[.]1`, `(at)`, `[:]` — all
-  refanged automatically, because that is how indicators arrive from reports and PDFs.
+  refanged automatically, because that is how indicators commonly arrive from reports and PDFs.
 - **Results grouped by what a hit actually means**, not one flat list (see below).
 - **Export** to clipboard as TSV, or download CSV/JSON — plus a one-click
   **"copy clean only"** for the shortlist worth investigating.
@@ -37,7 +37,7 @@ very different things. Two are easy to misread, so the UI labels them explicitly
 | **Known false positive** | Curated as a common FP. Strong reason to deprioritise. |
 | **Known infrastructure** | Major cloud, CDN or public resolver. Strong reason to deprioritise. |
 | **Context — look closer** | Dynamic DNS, VPN ranges, Tor exits, internet scanners. **Not** a safety signal — a reason to investigate further. |
-| **High-traffic site** | Informational only. **Popularity is not benignness.** |
+| **High-traffic site** | Informational only. **Popular does not mean safe.** |
 
 That last one matters. The popularity lists rank by traffic, not safety, and the raw data
 contains piracy sites, gambling domains, counterfeit storefronts and plenty of malware
