@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+  # Pushes to the default branch are already covered by the deploy workflow,
+  # which runs the same checks before it publishes. Ignoring them here keeps
+  # the suite from running twice on every merge.
+  push:
+    branches-ignore: [main, master]
+  workflow_dispatch:
+
+permissions: {}
+
+# A new push to the same PR supersedes the run in flight.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Test
+        run: npm test
+
+      # `npm run build` runs tsc --noEmit and then vite build, so this covers
+      # both type checking and that the app actually bundles.
+      - name: Typecheck and build
+        run: npm run build
