@@ -8,6 +8,13 @@ likely false positives are out of the way before investigation starts.
 there is no backend, no telemetry, and no analytics. The only network requests the app
 makes are for the warninglists themselves.
 
+## Demo
+
+![Four indicators checked against 121 lists: 8.8.8.8 flagged as known infrastructure
+and as a VPN range worth a closer look; a defanged Tor exit node URL recognised as an
+IPv4 indicator; example.com hitting a known false positive, known infrastructure and
+five popularity lists; and an unknown domain reported clean.](docs/images/screenshot.png)
+
 ## The problem it solves
 
 An analyst triaging a batch of indicators has no fast way to tell which ones are noise.
