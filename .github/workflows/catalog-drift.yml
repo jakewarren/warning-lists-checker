@@ -1,0 +1,73 @@
+name: Catalog drift check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+
+      - name: Compare upstream lists against catalog.json
+        id: diff
+        run: |
+          curl -s "https://api.github.com/repos/MISP/misp-warninglists/git/trees/main?recursive=1" \
+            | jq -r '.tree[] | select(.path | endswith("/list.json")) | .path | split("/")[1]' \
+            | sort > /tmp/upstream.txt
+          jq -r '.[].name' src/catalog.json | sort > /tmp/ours.txt
+          # Hash lists are deliberately excluded from the catalog.
+          printf 'windows-binary-hashes\nnioc-filehash\n' | sort > /tmp/excluded.txt
+          comm -23 /tmp/upstream.txt /tmp/ours.txt | comm -23 - /tmp/excluded.txt > /tmp/missing.txt
+          if [ -s /tmp/missing.txt ]; then
+            echo "drift=true" >> "$GITHUB_OUTPUT"
+            { echo 'body<<EOF'; \
+              echo 'Upstream MISP has lists absent from `src/catalog.json`:'; echo; \
+              sed 's/^/- /' /tmp/missing.txt; echo; \
+              echo 'Run `npm run build:catalog`, review the assigned tiers, and commit.'; \
+              echo EOF; } >> "$GITHUB_OUTPUT"
+          else
+            echo "drift=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open an issue
+        if: steps.diff.outputs.drift == 'true'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const body = process.env.BODY
+            const title = 'Catalog drift: upstream MISP added warninglists'
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'catalog-drift',
+            })
+            if (existing.data.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.data[0].number, body,
+              })
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['catalog-drift'],
+              })
+            }
+        env:
+          BODY: ${{ steps.diff.outputs.body }}

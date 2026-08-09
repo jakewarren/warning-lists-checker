@@ -20,6 +20,11 @@
 - **The word "clean" is reserved for full coverage.** When any in-scope list failed to load, zero-hit indicators must be labeled `no hits (N/M lists)` instead.
 - **Node 20+** for the toolchain.
 - **Vite `base` must be `'./'`** so the build works from a GitHub Pages project subpath.
+- **CI supply-chain hardening.** Every GitHub Action is pinned to a full commit
+  SHA with a trailing `# vN` comment, never a moving tag. Every workflow job
+  begins with a `step-security/harden-runner` step. Workflow-level `permissions`
+  is `{}` and each job declares its own minimum. Dependabot keeps both the
+  action SHAs and the npm devDependencies current.
 
 ## Terminology
 
@@ -125,7 +130,9 @@ Two independent axes, deliberately not conflated:
 `base: './'` is required for GitHub Pages project sites, which serve from `/<repo>/`.
 
 ```ts
-import { defineConfig } from 'vite'
+// Imported from 'vitest/config', not 'vite' — the base defineConfig type does
+// not accept the `test` key and would fail `tsc --noEmit`.
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   base: './',
@@ -1353,9 +1360,13 @@ describe('buildHostnameMatcher', () => {
     expect(m.match('com', 'domain')).toBe(false)
   })
 
-  it('is case-insensitive on both sides', () => {
+  // Entries come from upstream and are not guaranteed lowercase, so the
+  // matcher lowercases them at build time. The indicator is NOT lowercased
+  // here: parse.ts guarantees `normalized` is already lowercase, and
+  // re-normalizing on every call would be waste on a hot path.
+  it('lowercases its entries at build time', () => {
     const u = buildHostnameMatcher(['EXAMPLE.com'])
-    expect(u.match('A.Example.COM', 'domain')).toBe(true)
+    expect(u.match('a.example.com', 'domain')).toBe(true)
   })
 
   it('never matches IP indicators', () => {
@@ -1375,8 +1386,9 @@ describe('buildSubstringMatcher', () => {
     expect(m.match('example.com', 'domain')).toBe(false)
   })
 
-  it('is case-insensitive', () => {
-    expect(m.match('MY-SANDBOX.example.com', 'domain')).toBe(true)
+  it('lowercases its entries at build time', () => {
+    const s = buildSubstringMatcher(['SANDBOX'])
+    expect(s.match('my-sandbox.example.com', 'domain')).toBe(true)
   })
 })
 
@@ -1543,7 +1555,7 @@ git commit -m "feat: add string, hostname, substring and regex matchers plus fac
 
 Rationale: consulting all 123 lists for every indicator is both slower and wrong. Upstream `matching_attributes` says which MISP attribute types a list is for. The observed vocabulary across all lists is: `domain|ip` (105), `ip-src` (74), `ip-dst` (74), `ip-src|port` (70), `ip-dst|port` (70), `hostname` (38), `domain` (38), `url` (27), `uri` (6), plus hash, email, phone and `azure-application-id` attributes.
 
-`domain|ip` is ambiguous on its own — it appears on both CIDR and hostname lists — so it counts toward IP applicability always, but toward host applicability only when the list type is not `cidr`.
+`domain|ip` is ambiguous on its own — it appears on 105 of the 123 lists, on both CIDR and hostname lists, because it is a composite attribute whose two halves belong to different indicator families. It must therefore be disambiguated by the list's `type` in **both** directions: it counts toward IP applicability only when the list is `cidr`, and toward host applicability only when it is not. Counting it unconditionally on the IP side would route all 105 lists to every IPv4 indicator instead of the correct 74.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1623,6 +1635,19 @@ describe('appliesTo', () => {
     expect(appliesTo(cidrList, 'unparseable')).toBe(false)
     expect(appliesTo(hostnameList, 'unparseable')).toBe(false)
   })
+
+  it('disambiguates the domain|ip composite attribute by list type', () => {
+    // domain|ip appears on 105 of 123 lists and covers both families at once,
+    // so on its own it must never pull a list into the wrong family.
+    const cidrComposite = entry({ type: 'cidr', matchingAttributes: ['domain|ip'] })
+    const hostComposite = entry({ type: 'hostname', matchingAttributes: ['domain|ip'] })
+
+    expect(appliesTo(cidrComposite, 'ipv4')).toBe(true)
+    expect(appliesTo(cidrComposite, 'domain')).toBe(false)
+
+    expect(appliesTo(hostComposite, 'domain')).toBe(true)
+    expect(appliesTo(hostComposite, 'ipv4')).toBe(false)
+  })
 })
 ```
 
@@ -1636,19 +1661,25 @@ Expected: FAIL — cannot resolve `./applicability`.
 ```ts
 import type { CatalogEntry, IndicatorType } from './types'
 
-/** Attributes that mean "this list is about IP addresses". */
+/**
+ * Attributes that unambiguously mean "this list is about IP addresses".
+ * `domain|ip` is deliberately absent — see COMPOSITE below.
+ */
 export const IP_ATTRS = new Set([
-  'ip-src', 'ip-dst', 'ip-src|port', 'ip-dst|port', 'domain|ip',
+  'ip-src', 'ip-dst', 'ip-src|port', 'ip-dst|port',
 ])
 
-/**
- * Attributes that mean "this list is about hostnames". `domain|ip` is
- * deliberately excluded here and handled separately, since it also appears on
- * CIDR lists where it refers to the IP half of the composite attribute.
- */
+/** Attributes that unambiguously mean "this list is about hostnames". */
 export const HOST_ATTRS = new Set([
   'hostname', 'domain', 'hostname|port', 'url', 'uri',
 ])
+
+/**
+ * A composite attribute covering both families at once. It appears on 105 of
+ * 123 lists, so it carries almost no signal on its own and must be
+ * disambiguated by the list's own type in both directions.
+ */
+const COMPOSITE = 'domain|ip'
 
 function intersects(attrs: string[], set: Set<string>): boolean {
   for (const a of attrs) {
@@ -1660,14 +1691,17 @@ function intersects(attrs: string[], set: Set<string>): boolean {
 export function appliesTo(entry: CatalogEntry, type: IndicatorType): boolean {
   if (type === 'unparseable') return false
 
+  const composite = entry.matchingAttributes.includes(COMPOSITE)
+
   if (type === 'ipv4' || type === 'ipv6') {
-    return intersects(entry.matchingAttributes, IP_ATTRS)
+    if (intersects(entry.matchingAttributes, IP_ATTRS)) return true
+    return composite && entry.type === 'cidr'
   }
 
   // domain | url
   if (entry.type === 'cidr') return false
   if (intersects(entry.matchingAttributes, HOST_ATTRS)) return true
-  return entry.matchingAttributes.includes('domain|ip')
+  return composite
 }
 ```
 
@@ -2132,7 +2166,7 @@ git commit -m "feat: add IndexedDB list cache with age-based decay and stale fal
 **Interfaces:**
 - Consumes: `parseInput` from `./parse`, `buildMatcher` from `./matchers`, `appliesTo` from `./applicability`, `CachedList` from `./listStore`, and the types from `./types`.
 - Produces: `createEngine(catalog: CatalogEntry[]): Engine`, where
-  `Engine = { ingest(lists: Map<string, CachedList>): void; run(raw: string, coverage: Omit<Coverage,'oldestFetchedAt'> & { oldestFetchedAt: number | null }): MatchReport }`.
+  `Engine = { ingest(lists: Map<string, CachedList>): void; run(raw: string, coverage: Coverage): MatchReport }`.
   Also `coverageLabel(c: Coverage): string` — the single place the "clean" vs "no hits (N/M)" rule lives.
 
 - [ ] **Step 1: Write the failing test**
@@ -3394,18 +3428,20 @@ Check, in order:
 
 - [ ] **Step 5: Create `.github/workflows/deploy.yml`**
 
+Every action is pinned to a full commit SHA rather than a moving tag, every
+job starts with `harden-runner`, and permissions are granted per job rather
+than globally — the build job never needs `pages: write`.
+
 ```yaml
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# No workflow-level permissions block: each job declares its own minimum.
+permissions: {}
 
 concurrency:
   group: pages
@@ -3414,29 +3450,50 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          # Start in audit so the first runs record real egress. Once the
+          # Insights page shows a stable endpoint set, switch to `block` and
+          # add an allowed-endpoints list.
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
           cache: npm
+
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          egress-policy: audit
+
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 ```
 
 - [ ] **Step 6: Create `.github/workflows/catalog-drift.yml`**
@@ -3451,16 +3508,22 @@ on:
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
-permissions:
-  contents: read
-  issues: write
+permissions: {}
 
 jobs:
   drift:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
           cache: npm
@@ -3489,7 +3552,7 @@ jobs:
 
       - name: Open an issue
         if: steps.diff.outputs.drift == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const body = process.env.BODY
@@ -3511,6 +3574,40 @@ jobs:
             }
         env:
           BODY: ${{ steps.diff.outputs.body }}
+```
+
+- [ ] **Step 6b: Create `.github/dependabot.yml`**
+
+Because every action is pinned to a SHA, Dependabot is what keeps those pins
+moving — it bumps the SHA and rewrites the trailing `# v4` comment. Without it,
+SHA pinning silently freezes the actions at today's versions forever.
+
+```yaml
+version: 2
+updates:
+  # Keeps the SHA-pinned actions above current. Dependabot rewrites both the
+  # SHA and its trailing version comment.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(actions)'
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      # This project has zero runtime dependencies, so every update is a
+      # devDependency; one grouped PR per week rather than five.
+      dev-dependencies:
+        patterns: ['*']
 ```
 
 - [ ] **Step 7: Create `README.md`**
@@ -3558,7 +3655,7 @@ npm run build:catalog  # regenerate src/catalog.json from upstream
 - [ ] **Step 8: Commit**
 
 ```bash
-git add src/ui/app.ts src/main.ts .github/workflows/deploy.yml .github/workflows/catalog-drift.yml README.md
+git add src/ui/app.ts src/main.ts .github/workflows/deploy.yml .github/workflows/catalog-drift.yml .github/dependabot.yml README.md
 git commit -m "feat: wire up app shell, popularity opt-in, Pages deploy and drift check"
 ```
 

@@ -122,7 +122,9 @@ small enough to stay in core.
    the record so results display exactly what was pasted.
 3. **Classify**, in order: URL (has a scheme or `/`) → parse and extract the hostname,
    keeping the full URL as the display value · IPv4 · IPv6 · domain · otherwise
-   `unparseable`.
+   `unparseable`. The extracted host is re-classified, so an IP-literal URL carries
+   type `ipv4`/`ipv6` and reaches the CIDR lists — a URL is a carrier, and the type
+   must describe the value the matchers actually see.
 4. Dedupe on the normalized value, preserving first-seen order and an occurrence count.
 
 Unparseable lines appear in their own section rather than being silently dropped. An

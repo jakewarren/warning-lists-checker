@@ -1,0 +1,1930 @@
+[
+  {
+    "name": "akamai",
+    "title": "List of known Akamai IP ranges",
+    "description": "Akamai IP ranges from BGP search",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6444
+  },
+  {
+    "name": "alexa",
+    "title": "Top 1000 website from Alexa",
+    "description": "Event contains one or more entries from the top 1000 of the most used website (Alexa).",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 19366
+  },
+  {
+    "name": "alphastrike-research-nt-scanning",
+    "title": "Alphastrike research IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Alphastrike research scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 921
+  },
+  {
+    "name": "alphastrike-scanning",
+    "title": "Alpha Strike Labs IP Ranges Used for Scanning",
+    "description": "List containing IP ranges associated with Alpha Strike Labs scanning infrastructure. Alpha Strike Labs GmbH (AS208843) operates legitimate security research and internet-wide scanning services [https://ipinfo.io/AS208843]",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 513
+  },
+  {
+    "name": "amazon-aws",
+    "title": "List of known Amazon AWS IP address ranges",
+    "description": "Amazon AWS IP address ranges (https://ip-ranges.amazonaws.com/ip-ranges.json)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 95159
+  },
+  {
+    "name": "apple",
+    "title": "List of known Apple IP ranges",
+    "description": "IP ranges assigned to Apple",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 351
+  },
+  {
+    "name": "automated-malware-analysis",
+    "title": "List of known domains used by automated malware analysis services & security vendors",
+    "description": "Domains used by automated malware analysis services & security vendors",
+    "type": "substring",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 932
+  },
+  {
+    "name": "bank-website",
+    "title": "List of known bank domains",
+    "description": "Event contains one or more entries of known banking website",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 50779
+  },
+  {
+    "name": "bufferover-nt-scanning",
+    "title": "Bufferover IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Bufferover scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1146
+  },
+  {
+    "name": "captive-portals",
+    "title": "Captive Portal Detection Hostnames",
+    "description": "Hostnames used by different desktop and mobile device operating systems for captive portal detection as documented by the Wireless Broadband Alliance.",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 946
+  },
+  {
+    "name": "censys-scanning",
+    "title": "Censys IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with Censys scanning [https://support.censys.io/hc/en-us/articles/360043177092-Opt-Out-of-Data-Collection#Can_I_opt_out_of_Censys_data_collection?]",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 743
+  },
+  {
+    "name": "check-host-net",
+    "title": "List of known check-host.net IP address ranges",
+    "description": "check-host IP addresses (https://check-host.net/nodes/ips)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1293
+  },
+  {
+    "name": "cisco_top1000",
+    "title": "Top 1000 websites from Cisco Umbrella",
+    "description": "Event contains one or more entries from the top 1000 of the most used websites (Cisco Umbrella).",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 28210
+  },
+  {
+    "name": "cisco_top10k",
+    "title": "Top 10 000 websites from Cisco Umbrella",
+    "description": "Event contains one or more entries from the top 10 000 of the most used websites (Cisco Umbrella).",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 306741
+  },
+  {
+    "name": "cisco_top20k",
+    "title": "Top 20 000 websites from Cisco Umbrella",
+    "description": "Event contains one or more entries from the top 20 000 of the most used websites (Cisco Umbrella).",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 635769
+  },
+  {
+    "name": "cisco_top5k",
+    "title": "Top 5000 websites from Cisco Umbrella",
+    "description": "Event contains one or more entries from the top 5000 of the most used websites (Cisco Umbrella).",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 148596
+  },
+  {
+    "name": "cloudflare",
+    "title": "List of known Cloudflare IP ranges",
+    "description": "List of known Cloudflare IP ranges (https://www.cloudflare.com/ips/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 801
+  },
+  {
+    "name": "coalition-signals-intelligence-nt-scanning",
+    "title": "Coalition signals intelligence IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Coalition signals intelligence scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 38624
+  },
+  {
+    "name": "common-contact-emails",
+    "title": "Common contact e-mail addresses",
+    "description": "A list of commonly used abuse and contact e-mail addresses, including the ones denoted in RFC2142.",
+    "type": "regex",
+    "matchingAttributes": [
+      "email-dst",
+      "email-src",
+      "target-email"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 357
+  },
+  {
+    "name": "common-ioc-false-positive",
+    "title": "List of known hashes with common false-positives (based on Florian Roth input list)",
+    "description": "Event contains one or more entries with common false-positives",
+    "type": "string",
+    "matchingAttributes": [
+      "md5",
+      "sha1",
+      "sha224",
+      "sha256",
+      "sha512",
+      "filename|md5",
+      "filename|sha1",
+      "filename|sha224",
+      "filename|sha256",
+      "filename|sha512"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 4121
+  },
+  {
+    "name": "covid",
+    "title": "Valid covid-19 related domains",
+    "description": "Maintained using different lists (such as Jaime Blasco's and Krassimir's lists).",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "url"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 9497
+  },
+  {
+    "name": "covid-19-cyber-threat-coalition-whitelist",
+    "title": "Covid-19 Cyber Threat Coalition's Whitelist",
+    "description": "The Cyber Threat Coalition's whitelist of COVID-19 related websites.",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "url"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 21312
+  },
+  {
+    "name": "covid-19-krassi-whitelist",
+    "title": "Covid-19 Krassi's Whitelist",
+    "description": "Krassimir's Covid-19 whitelist of known good Covid-19 related websites.",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "url"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 3118
+  },
+  {
+    "name": "crl-hostname",
+    "title": "CRL and OCSP domains",
+    "description": "Domains that belongs to CRL or OCSP",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "domain|ip"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 228
+  },
+  {
+    "name": "crl-ip",
+    "title": "CRL and OCSP IP addresses",
+    "description": "IP addresses that belongs to CRL or OCSP",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 272
+  },
+  {
+    "name": "cybergreen-nt-scanning",
+    "title": "Cybergreen IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Cybergreen scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2025/12/10",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 421
+  },
+  {
+    "name": "cyberresilience-nt-scanning",
+    "title": "Cyberresilience IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Cyberresilience scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 774
+  },
+  {
+    "name": "cypex-nt-scanning",
+    "title": "Cypex IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Cypex scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/04/09",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 625
+  },
+  {
+    "name": "dax30",
+    "title": "List of known dax30 webpages",
+    "description": "Event contains one or more entries of known dax30 webpages",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 524
+  },
+  {
+    "name": "digitalside",
+    "title": "OSINT.DigitalSide.IT Warning List",
+    "description": "OSINT DigitalSide Threat-Intel Repository - MISP Warninglist - List of domains should be marked as false positive in the related MISP event with IDS attribute not flagged",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1378
+  },
+  {
+    "name": "disposable-email",
+    "title": "List of disposable email domains",
+    "description": "List of disposable email domains",
+    "type": "substring",
+    "matchingAttributes": [
+      "email-src",
+      "email-dst",
+      "whois-registrant-email",
+      "domain|ip",
+      "dns-soa-email"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 169058
+  },
+  {
+    "name": "dynamic-dns",
+    "title": "List of known dynamic DNS domains",
+    "description": "Event contains one or more entries of known dynamic DNS domains.",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 807387
+  },
+  {
+    "name": "eicar.com",
+    "title": "List of hashes for EICAR test virus",
+    "description": "Event contains one or more entries based on hashes for EICAR test virus",
+    "type": "string",
+    "matchingAttributes": [
+      "md5",
+      "sha1",
+      "sha256",
+      "sha512",
+      "filename|md5",
+      "filename|sha1",
+      "filename|sha256",
+      "filename|sha512"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 1445
+  },
+  {
+    "name": "empty-hashes",
+    "title": "List of known hashes for empty files",
+    "description": "Event contains one or more entries of empty files based on known hashed",
+    "type": "string",
+    "matchingAttributes": [
+      "md5",
+      "sha1",
+      "sha224",
+      "sha256",
+      "sha512",
+      "filename|md5",
+      "filename|sha1",
+      "filename|sha224",
+      "filename|sha256",
+      "filename|sha512",
+      "ssdeep",
+      "filename|ssdeep"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 811
+  },
+  {
+    "name": "f6-nt-scanning",
+    "title": "F6 IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the F6 scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 426
+  },
+  {
+    "name": "fastly",
+    "title": "List of known Fastly IP address ranges",
+    "description": "Fastly IP address ranges (https://api.fastly.com/public-ip-list)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 737
+  },
+  {
+    "name": "findip-host",
+    "title": "List of known hostname used for querying your source IP. This can be used as exclusion for your Passive DNS lookup.",
+    "description": "Event contains one or more entries of known hostname querying your source IP.",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 890
+  },
+  {
+    "name": "github",
+    "title": "List of known GitHub IP ranges (https://api.github.com/meta)",
+    "description": "GitHub IP address ranges (https://api.github.com/meta)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 132342
+  },
+  {
+    "name": "google",
+    "title": "List of known google domains",
+    "description": "Event contains one or more entries of known google domains",
+    "type": "string",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 13512
+  },
+  {
+    "name": "google-chrome-crux-1million",
+    "title": "google-chrome-crux-1million",
+    "description": "Cached Chrome Top Million Websites - top 1 million",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "uri",
+      "url"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 25510633
+  },
+  {
+    "name": "google-gcp",
+    "title": "List of known GCP (Google Cloud Platform) IP address ranges",
+    "description": "GCP (Google Cloud Platform) IP address ranges (https://www.gstatic.com/ipranges/cloud.json)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 10424
+  },
+  {
+    "name": "google-gmail-sending-ips",
+    "title": "List of known Gmail sending IP ranges",
+    "description": "List of known Gmail sending IP ranges (https://support.google.com/a/answer/27642?hl=en)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 538
+  },
+  {
+    "name": "googlebot",
+    "title": "List of known Googlebot IP ranges (https://developers.google.com/search/apis/ipranges/googlebot.json)",
+    "description": "Google Bot IP address ranges (https://developers.google.com/search/apis/ipranges/googlebot.json)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 2065
+  },
+  {
+    "name": "internet-census-nt-scanning",
+    "title": "Internet census IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Internet census scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 6809
+  },
+  {
+    "name": "internetcleanup-scanner",
+    "title": "List of published IP address ranges for Internet Cleanup Foundation scanners",
+    "description": "Internet Cleanup Foundation scaninfo (https://internetcleanup.foundation/scaninfo/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 513
+  },
+  {
+    "name": "intrinsec-nt-scanning",
+    "title": "Intrinsec IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Intrinsec scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 463
+  },
+  {
+    "name": "ipinfo-nt-scanning",
+    "title": "Ipinfo IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Ipinfo scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1004
+  },
+  {
+    "name": "ipip-nt-scanning",
+    "title": "Ipip IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Ipip scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 894
+  },
+  {
+    "name": "ipv6-linklocal",
+    "title": "List of IPv6 link local blocks",
+    "description": "Event contains one or more entries part of the IPv6 link local prefix (RFC 4291)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 329
+  },
+  {
+    "name": "link-in-bio",
+    "title": "List of known link in Bio domains",
+    "description": "Event contains one or more entries of known Link in bio domains. Those shorten links are a reference to a list of links.",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1965
+  },
+  {
+    "name": "lots-project",
+    "title": "List of LOTS (Living Off Trusted Sites) Project Domains",
+    "description": "List of popular legitimate domains from LOTS (Living Off Trusted Sites) Project used to conduct phishing, C&C, exfiltration or downloading tools to evade detection",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "domain|ip",
+      "hostname",
+      "hostname|port",
+      "url"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 4112
+  },
+  {
+    "name": "majestic_million",
+    "title": "Top 10000 websites from Majestic Million",
+    "description": "Event contains one or more entries from the top 10K of the most used websites (Majestic Million).",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 200020
+  },
+  {
+    "name": "microsoft",
+    "title": "List of known microsoft domains",
+    "description": "Event contains one or more entries of known microsoft domains",
+    "type": "string",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 4898
+  },
+  {
+    "name": "microsoft-attack-simulator",
+    "title": "List of known Office 365 Attack Simulator used for phishing awareness campaigns",
+    "description": "Office 365 URLs and IP address ranges used for their attack simulator in Office 365 Threat Intelligence",
+    "type": "substring",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain",
+      "domain|ip",
+      "hostname",
+      "url"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 4041
+  },
+  {
+    "name": "microsoft-azure",
+    "title": "List of known Microsoft Azure Datacenter IP Ranges",
+    "description": "Microsoft Azure Datacenter IP Ranges",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 65734
+  },
+  {
+    "name": "microsoft-azure-appid",
+    "title": "List of Azure Applicaiton IDs",
+    "description": "List of Azure Application IDs (https://learn.microsoft.com/en-us/troubleshoot/azure/active-directory/verify-first-party-apps-sign-in)",
+    "type": "string",
+    "matchingAttributes": [
+      "azure-application-id"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 494
+  },
+  {
+    "name": "microsoft-azure-china",
+    "title": "List of known Microsoft Azure China Datacenter IP Ranges",
+    "description": "Microsoft Azure China Datacenter IP Ranges",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 5306
+  },
+  {
+    "name": "microsoft-azure-germany",
+    "title": "List of known Microsoft Azure Germany Datacenter IP Ranges",
+    "description": "Microsoft Azure Germany Datacenter IP Ranges",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1131
+  },
+  {
+    "name": "microsoft-azure-us-gov",
+    "title": "List of known Microsoft Azure US Government Cloud Datacenter IP Ranges",
+    "description": "Microsoft Azure US Government Cloud Datacenter IP Ranges",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 5253
+  },
+  {
+    "name": "microsoft-office365",
+    "title": "List of known Office 365 URLs",
+    "description": "Office 365 URLs and IP address ranges",
+    "type": "string",
+    "matchingAttributes": [
+      "domain",
+      "domain|ip",
+      "hostname"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 5302
+  },
+  {
+    "name": "microsoft-office365-cn",
+    "title": "List of known Office 365 IP address ranges in China",
+    "description": "Office 365 IP address ranges in China",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1879
+  },
+  {
+    "name": "microsoft-office365-ip",
+    "title": "List of known Office 365 IP address ranges",
+    "description": "Office 365 IP address ranges",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 2343
+  },
+  {
+    "name": "microsoft-win10-connection-endpoints",
+    "title": "List of known Windows 10 connection endpoints",
+    "description": "Event contains one or more entries of known Windows 10 connection endpoints (https://docs.microsoft.com/en-us/windows/privacy/manage-windows-endpoints)",
+    "type": "string",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 5268
+  },
+  {
+    "name": "modat-nt-scanning",
+    "title": "Modat IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Modat scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1162
+  },
+  {
+    "name": "modat-scanner",
+    "title": "List of published IP address ranges for Modat Scanner",
+    "description": "Modat Scanner (https://www.modat.io/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1248
+  },
+  {
+    "name": "moz-top500",
+    "title": "Top 500 domains and pages from https://moz.com/top500",
+    "description": "Event contains one or more entries from the top 500 of the most used domains from Moz.",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "uri",
+      "url"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 10134
+  },
+  {
+    "name": "mozilla-CA",
+    "title": "Fingerprint of trusted CA certificates",
+    "description": "Fingerprint of trusted CA certificates taken from Mozilla's lists at https://wiki.mozilla.org/CA",
+    "type": "string",
+    "matchingAttributes": [
+      "md5",
+      "sha1",
+      "sha256",
+      "filename|md5",
+      "filename|sha1",
+      "filename|sha256",
+      "x509-fingerprint-md5",
+      "x509-fingerprint-sha1",
+      "x509-fingerprint-sha256"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 28291
+  },
+  {
+    "name": "mozilla-IntermediateCA",
+    "title": "Fingerprint of known intermediate of trusted certificates",
+    "description": "Fingerprint of known intermediate of trusted certificates taken from Mozilla's lists at https://wiki.mozilla.org/CA",
+    "type": "string",
+    "matchingAttributes": [
+      "md5",
+      "sha1",
+      "sha256",
+      "filename|md5",
+      "filename|sha1",
+      "filename|sha256",
+      "x509-fingerprint-md5",
+      "x509-fingerprint-sha1",
+      "x509-fingerprint-sha256"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 386089
+  },
+  {
+    "name": "multicast",
+    "title": "List of RFC 5771 multicast CIDR blocks",
+    "description": "Event contains one or more entries part of the RFC 5771 multicast CIDR blocks",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 621
+  },
+  {
+    "name": "netsecscan-nt-scanning",
+    "title": "Netsecscan IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Netsecscan scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2025/12/10",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 672
+  },
+  {
+    "name": "netsecscan-scanning",
+    "title": "NetSecScan IP-Ranges, pot. used for Scanning",
+    "description": "List of NetSecScan.net scanners ",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 553
+  },
+  {
+    "name": "onyphe-nt-scanning",
+    "title": "Onyphe IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Onyphe scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 3470
+  },
+  {
+    "name": "onyphe-scanner",
+    "title": "List of published IP address ranges for Onyphe Scanner",
+    "description": "Onyphe Scanner (https://www.onyphe.io/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 530
+  },
+  {
+    "name": "openai-gptbot",
+    "title": "List of known IP address ranges for OpenAI GPT crawler bot",
+    "description": "OpenAI gptbot crawler (https://openai.com/gptbot-ranges.txt)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 373
+  },
+  {
+    "name": "ovh-cluster",
+    "title": "List of known Ovh Cluster IP",
+    "description": "OVH Cluster IP address (https://docs.ovh.com/fr/hosting/liste-des-adresses-ip-des-clusters-et-hebergements-web/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 11952
+  },
+  {
+    "name": "palo-alto-networks-cortex-xpanse",
+    "title": "List of known IP address ranges for Palo Alto Networks Cortex Xpanse",
+    "description": "Palo Alto Networks Cortex Xpanse (https://docs-cortex.paloaltonetworks.com/r/1/Cortex-Xpanse/Scanning-activity)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 706
+  },
+  {
+    "name": "parking-domain",
+    "title": "Parking domains",
+    "description": "List of parking domain's ip adresses",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 2797
+  },
+  {
+    "name": "parking-domain-ns",
+    "title": "Parking domains name server",
+    "description": "List of parking domain's name server",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain|ip",
+      "domain",
+      "hostname"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 3236
+  },
+  {
+    "name": "phone_numbers",
+    "title": "Unattributed phone number.",
+    "description": "Numbers that cannot be attributed because they reserved for different purposes.",
+    "type": "regex",
+    "matchingAttributes": [
+      "phone-number",
+      "whois-registrant-phone"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1838
+  },
+  {
+    "name": "probethenet-nt-scanning",
+    "title": "Probethenet IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Probethenet scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 555
+  },
+  {
+    "name": "public-dns-hostname",
+    "title": "List of known public DNS resolvers expressed as hostname",
+    "description": "Event contains one or more public DNS resolvers (expressed as hostname) as attribute with an IDS flag set",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1363025
+  },
+  {
+    "name": "public-dns-v4",
+    "title": "List of known IPv4 public DNS resolvers",
+    "description": "Event contains one or more public IPv4 DNS resolvers as attribute with an IDS flag set",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1313670
+  },
+  {
+    "name": "public-dns-v6",
+    "title": "List of known IPv6 public DNS resolvers",
+    "description": "Event contains one or more public IPv6 DNS resolvers as attribute with an IDS flag set",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 7791
+  },
+  {
+    "name": "public-ipfs-gateways",
+    "title": "List of known public IPFS gateways",
+    "description": "Event contains one or more entries of known public IPFS gateways",
+    "type": "string",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url",
+      "uri"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 2396
+  },
+  {
+    "name": "rapid7-nt-scanning",
+    "title": "Rapid7 IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Rapid7 scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 983
+  },
+  {
+    "name": "research-scanner-nt-scanning",
+    "title": "Research scanner IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Research scanner scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 996
+  },
+  {
+    "name": "rfc1918",
+    "title": "List of RFC 1918 CIDR blocks",
+    "description": "Event contains one or more entries part of the private network CIDR blocks (RFC 1918)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 376
+  },
+  {
+    "name": "rfc3849",
+    "title": "List of RFC 3849 CIDR blocks",
+    "description": "Event contains one or more entries part of the IPv6 documentation prefix (RFC 3849)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 334
+  },
+  {
+    "name": "rfc5735",
+    "title": "List of RFC 5735 CIDR blocks",
+    "description": "Event contains one or more entries part of the Special Use IPv4 Addresses CIDR blocks (RFC 5735)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 637
+  },
+  {
+    "name": "rfc6598",
+    "title": "List of RFC 6598 CIDR blocks",
+    "description": "Event contains one or more entries part of the Shared Address Space CIDR blocks (RFC 6598)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 341
+  },
+  {
+    "name": "rfc6761",
+    "title": "List of RFC 6761 Special-Use Domain Names",
+    "description": "Event contains one or more entries part of the Special-Use Domain Names (RFC 6761)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "domain|ip"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 831
+  },
+  {
+    "name": "second-level-tlds",
+    "title": "Second level TLDs as known by Mozilla Foundation",
+    "description": "Event contains one or more second level TLDs as attribute with an IDS flag set.",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "domain|ip"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 215109
+  },
+  {
+    "name": "security-provider-blogpost",
+    "title": "List of known security providers/vendors blog domain",
+    "description": "Event contains one or more entries of known security providers/vendors blog domain with an IDS flag set",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "domain|ip",
+      "hostname",
+      "url",
+      "uri"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 17006
+  },
+  {
+    "name": "shadowforce-nt-scanning",
+    "title": "Shadowforce IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Shadowforce scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 912
+  },
+  {
+    "name": "shadowforce-scanning",
+    "title": "Shadowforce IP-Ranges, pot. used for Scanning",
+    "description": "List of shadowforce.io scanners ",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 329
+  },
+  {
+    "name": "shadowserver",
+    "title": "Shadowserver IP-Ranges, pot. used for Scanning",
+    "description": "List of Shadowserver IP-Ranges. Potentially associated with Shadowserver scans. based on [https://bgp.he.net/search?search%5Bsearch%5D=shadowserver&commit=Search]",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1030
+  },
+  {
+    "name": "shadowserver-nt-scanning",
+    "title": "Shadowserver IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Shadowserver scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 611
+  },
+  {
+    "name": "shodan-nt-scanning",
+    "title": "Shodan IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Shodan scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1034
+  },
+  {
+    "name": "shodan-scanning",
+    "title": "Shodan IP-Ranges, pot. used for Scanning",
+    "description": "List of Shodan.io scanners ",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1271
+  },
+  {
+    "name": "sinkholes",
+    "title": "List of known sinkholes",
+    "description": "List of known sinkholes",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 2546
+  },
+  {
+    "name": "skipa-nt-scanning",
+    "title": "Skipa IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Skipa scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/03/13",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 410
+  },
+  {
+    "name": "smtp-receiving-ips",
+    "title": "List of known SMTP receiving IP addresses",
+    "description": "List of IP addresses for known SMTP servers.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 7063
+  },
+  {
+    "name": "smtp-sending-ips",
+    "title": "List of known SMTP sending IP ranges",
+    "description": "List of IP ranges for known SMTP servers.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 23612
+  },
+  {
+    "name": "stackpath",
+    "title": "List of known Stackpath CDN IP ranges",
+    "description": "List of known Stackpath (Highwinds) CDN IP ranges (https://support.stackpath.com/hc/en-us/articles/360001091666-Whitelist-CDN-WAF-IP-Blocks)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6787
+  },
+  {
+    "name": "stretchoid-nt-scanning",
+    "title": "Stretchoid IP Ranges Used for Scanning",
+    "description": "List containing IP's associated with the Stretchoid scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-dst|port",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 43855
+  },
+  {
+    "name": "telegram-ips",
+    "title": "List of known Telegram IP address ranges",
+    "description": "Telegram IP address ranges (https://core.telegram.org/resources/cidr.txt)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 647
+  },
+  {
+    "name": "tenable-cloud-ipv4",
+    "title": "List of known Tenable Cloud Sensors IPv4",
+    "description": "Tenable IPv4 Cloud Sensor addresses used for scanning Internet-facing infrastructure",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1230
+  },
+  {
+    "name": "tenable-cloud-ipv6",
+    "title": "List of known Tenable Cloud Sensors IPv6",
+    "description": "Tenable IPv6 Cloud Sensor addresses used for scanning Internet-facing infrastructure",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 858
+  },
+  {
+    "name": "ti-falsepositives",
+    "title": "Hashes that are often included in IOC lists but are false positives.",
+    "description": "Hashes that are often included in IOC lists but are false positives.",
+    "type": "string",
+    "matchingAttributes": [
+      "md5",
+      "sha1",
+      "sha256",
+      "filename|md5",
+      "filename|sha1",
+      "filename|sha256"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 1314782
+  },
+  {
+    "name": "tlds",
+    "title": "TLDs as known by IANA",
+    "description": "Event contains one or more TLDs as attribute with an IDS flag set",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "domain|ip"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 19788
+  },
+  {
+    "name": "tranco",
+    "title": "Top 1,000,000 most-used sites from Tranco",
+    "description": "Event contains one or more entries from the top 1,000,000 most-used sites (https://tranco-list.eu/).",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 21813046
+  },
+  {
+    "name": "tranco10k",
+    "title": "Top 10K most-used sites from Tranco",
+    "description": "Event contains one or more entries from the top 10K most-used sites (https://tranco-list.eu/).",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 198028
+  },
+  {
+    "name": "umbrella-blockpage-hostname",
+    "title": "cisco-umbrella-blockpage-hostname",
+    "description": "Umbrella blockpage hostnames",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 397
+  },
+  {
+    "name": "umbrella-blockpage-v4",
+    "title": "cisco-umbrella-blockpage-ipv4",
+    "description": "Cisco Umbrella blockpage in IPv4",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 364
+  },
+  {
+    "name": "umbrella-blockpage-v6",
+    "title": "cisco-umbrella-blockpage-ipv6",
+    "description": "Cisco Umbrella blockpage in IPv6",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 376
+  },
+  {
+    "name": "umich-cse-connection-attempts",
+    "title": "University of Michigan CSE connection-attempt network ranges",
+    "description": "University of Michigan Computer Science and Engineering connection attempts page (https://cse.engin.umich.edu/about/resources/connection-attempts/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 560
+  },
+  {
+    "name": "university_domains",
+    "title": "University domains",
+    "description": "List of University domains from https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 205648
+  },
+  {
+    "name": "url-shortener",
+    "title": "List of known URL Shorteners domains",
+    "description": "Event contains one or more entries of known Shorteners domains",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "url",
+      "uri"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 3999
+  },
+  {
+    "name": "vpn-ipv4",
+    "title": "Specialized list of vpn-ipv4 addresses belonging to common VPN providers and datacenters",
+    "description": "Specialized list of vpn-ipv4 addresses belonging to common VPN providers and datacenters",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 955247
+  },
+  {
+    "name": "vpn-ipv6",
+    "title": "Specialized list of IPv6 addresses belonging to common VPN providers and datacenters",
+    "description": "Specialized list of IPv6 addresses belonging to common VPN providers and datacenters",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 31621
+  },
+  {
+    "name": "whats-my-ip",
+    "title": "List of known domains to know external IP",
+    "description": "Event contains one or more entries of known 'what's my ip' domains",
+    "type": "hostname",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip",
+      "uri",
+      "url"
+    ],
+    "tier": "known-fp",
+    "loadTier": "core",
+    "bytes": 5073
+  },
+  {
+    "name": "wikimedia",
+    "title": "List of known Wikimedia address ranges",
+    "description": "Wikimedia address ranges (http://noc.wikimedia.org/conf/reverse-proxy.php.txt)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 323
+  },
+  {
+    "name": "zscaler",
+    "title": "List of known Zscaler IP address ranges",
+    "description": "Zscaler IP address ranges (https://config.zscaler.com/api/zscaler.net/hubs/cidr/json/recommended)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 2312
+  }
+]
