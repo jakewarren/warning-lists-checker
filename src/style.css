@@ -8,16 +8,50 @@
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
+/* Dark palette applied two ways: by system preference when the user has not
+   chosen explicitly, and by an explicit data-theme="dark" set from the toggle.
+   The :not([data-theme='light']) guard is what lets an explicit light choice
+   win over a dark system setting. The two blocks are intentionally duplicated —
+   CSS has no way to share a declaration block between selectors, and the
+   alternative (a single [data-theme] selector plus JS that always stamps the
+   attribute) would break the no-JS and pre-hydration cases. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #14161a; --fg: #e6e8ec; --muted: #9aa1b1; --line: #2a2f38;
     --fp-bg: #10291c; --infra-bg: #121f31; --ctx-bg: #2a1f10; --pop-bg: #1d2027;
   }
 }
 
+:root[data-theme='dark'] {
+  --bg: #14161a; --fg: #e6e8ec; --muted: #9aa1b1; --line: #2a2f38;
+  --fp-bg: #10291c; --infra-bg: #121f31; --ctx-bg: #2a1f10; --pop-bg: #1d2027;
+}
+
 body { margin: 0; background: var(--bg); color: var(--fg); }
 #app { max-width: 60rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+/* Reserve space on the right so the title never slides under the GitHub
+   corner on a narrow viewport. */
+.header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 1rem; padding-right: 4.5rem;
+}
 h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
+
+#theme-toggle { flex: 0 0 auto; padding: .35rem .6rem; }
+#theme-toggle .icon { width: 1.05em; height: 1.05em; }
+
+/* GitHub corner. Fixed to the viewport so it stays put while results scroll. */
+.gh-corner { position: fixed; top: 0; right: 0; z-index: 10; line-height: 0; }
+.gh-corner svg { width: 4.5rem; height: 4.5rem; display: block; }
+.gh-corner .gh-bg { fill: var(--fg); }
+.gh-corner .gh-mark { fill: var(--bg); }
+.gh-corner:focus-visible { outline: 2px solid var(--infra); outline-offset: -4px; }
+
+@media (max-width: 32rem) {
+  .gh-corner svg { width: 3.5rem; height: 3.5rem; }
+  .header { padding-right: 3.5rem; }
+}
 .sub { color: var(--muted); margin: 0 0 1rem; font-size: .875rem; }
 
 textarea {

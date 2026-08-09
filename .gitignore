@@ -1,4 +1,38 @@
+# Dependencies
 node_modules
+
+# Build output
 dist
+dist-ssr
+*.tsbuildinfo
+
+# Test / tooling caches
+coverage
+.vitest
+.vite
+.eslintcache
+
+# Local environment overrides. Note .env is ignored outright rather than only
+# .env.local: this project has no server and no secrets, so any .env here would
+# be a mistake worth catching before it is committed.
+.env
+.env.*
+*.local
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Agent orchestration scratch space (see .superpowers/sdd)
 .superpowers

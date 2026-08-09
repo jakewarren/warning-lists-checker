@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MISP Warninglists Checker</title>
+    <meta name="description"
+      content="Check IPs, domains and URLs against the MISP warninglists to spot likely false positives. Runs entirely in your browser." />
+    <!-- Apply a stored theme choice before first paint. The module script is
+         deferred, so doing this there would flash the system theme first.
+         Wrapped because localStorage throws in some privacy modes. -->
+    <script>
+      try {
+        var t = localStorage.getItem('warning-lists-checker:theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
