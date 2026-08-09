@@ -3301,7 +3301,7 @@ const SHELL = `
     placeholder="8.8.8.8&#10;hxxps://evil[.]com/payload&#10;1.1.1.1"></textarea>
   <div class="toolbar">
     <button id="check" class="primary" disabled>Loading lists…</button>
-    <button id="load-heavy">Add popularity lists (${Math.round(heavyBytes / 1e6)} MB)</button>
+    <button id="load-heavy">Load popularity lists (${Math.round(heavyBytes / 1e6)} MB)</button>
     <button id="copy-tsv" disabled>Copy TSV</button>
     <button id="copy-clean" disabled>Copy clean only</button>
     <button id="dl-csv" disabled>CSV</button>
@@ -3422,7 +3422,7 @@ Check, in order:
    - `10.0.0.1` hits `rfc1918` under "Known false positive".
    - `evil.test`-style domains with no hits read `clean`.
    - The hash appears under "Not recognised as an IP, domain or URL".
-4. Click "Add popularity lists" — it loads, coverage becomes `123/123`, and the note disappears.
+4. Click "Load popularity lists" — it loads, coverage becomes `123/123`, and the note disappears.
 5. Reload the page: lists come from IndexedDB, so loading completes without network requests (confirm in DevTools Network).
 6. Click each export button and confirm the coverage header line is present.
 
