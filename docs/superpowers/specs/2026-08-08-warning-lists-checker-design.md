@@ -102,7 +102,8 @@ pure module with no DOM access, so it is directly unit-testable.
 machine-readable index of list types, and deriving one at runtime would mean 125
 requests before the first match. Shipping the catalog trades freshness for determinism:
 lists added upstream are not loaded until the catalog is updated. A CI job diffs
-upstream against the catalog and opens an issue when MISP adds a list. See `TODO.md`.
+upstream against the catalog and opens an issue when MISP adds a list
+(`.github/workflows/catalog-drift.yml`).
 
 **Two tiers, lazily loaded.** Core tier (121 lists, ~1.4 MB gzipped) loads on startup.
 Popularity tier (`tranco`, `google-chrome-crux-1million`; ~7 MB gzipped) loads only on

@@ -25,7 +25,8 @@ a front-end for it — paste, scan, move on to what actually matters.
   **"copy clean only"** for the shortlist worth investigating.
 - **Works offline after first load.** Lists are cached in IndexedDB; a failed refresh
   degrades to stale data with a visible warning rather than a dead app.
-- **~10,000 indicators** checked in well under a second.
+- **Fast.** 10,000 IPs against all 74 CIDR lists benchmarks at ~260 ms, pinned by a
+  test so it cannot silently regress.
 
 ## Reading the results
 

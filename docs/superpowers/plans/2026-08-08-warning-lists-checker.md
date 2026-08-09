@@ -316,7 +316,7 @@ git commit -m "chore: scaffold vite + typescript + vitest, add core type vocabul
 - Consumes: `CatalogEntry`, `Tier`, `LoadTier`, `ListType` from `src/core/types.ts`.
 - Produces: `src/catalog.json` — a JSON array of `CatalogEntry`, importable as `import catalog from '../catalog.json'`. Also exports `assignTier(name: string, upstreamType: ListType, attrs: string[]): Tier` and `assignLoadTier(name: string): LoadTier` from `scripts/build-catalog.ts` for testing.
 
-Background: upstream publishes no machine-readable index, so this script walks the GitHub tree API **once at dev time**, fetches each `list.json`, and writes a catalog we ship. It is never run in the browser. This is the freshness-for-determinism tradeoff recorded in `TODO.md`.
+Background: upstream publishes no machine-readable index, so this script walks the GitHub tree API **once at dev time**, fetches each `list.json`, and writes a catalog we ship. It is never run in the browser. This is a deliberate freshness-for-determinism tradeoff, backstopped by the drift job in Task 12.
 
 - [ ] **Step 1: Write the failing test for tier assignment**
 
@@ -3501,7 +3501,7 @@ jobs:
 
 - [ ] **Step 6: Create `.github/workflows/catalog-drift.yml`**
 
-This closes the `TODO.md` item: the catalog is app-owned, so something has to notice when upstream adds a list.
+The catalog is app-owned, so something has to notice when upstream adds a list.
 
 ```yaml
 name: Catalog drift check
