@@ -171,6 +171,42 @@ describe('parseInput', () => {
     expect(unparseable).toEqual(['d41d8cd98f00b204e9800998ecf8427e', '???'])
   })
 
+  // A token containing "/" is routed down the URL path by classify(), but the
+  // thing after hostname extraction is only an indicator if it is actually a
+  // host. Anything else must be reported as unparseable rather than promoted
+  // to a 'url' indicator that silently matches nothing.
+  it('rejects a slash-containing token whose host is not a valid indicator', () => {
+    // Regression: pasting an export header line back into the tool produced an
+    // indicator with normalized value "coverage=123".
+    const { indicators, unparseable } = parseInput('coverage=123/123')
+    expect(indicators).toEqual([])
+    expect(unparseable).toEqual(['coverage=123/123'])
+  })
+
+  it('rejects arbitrary slash-separated text', () => {
+    const { indicators, unparseable } = parseInput('foo/bar')
+    expect(indicators).toEqual([])
+    expect(unparseable).toEqual(['foo/bar'])
+  })
+
+  it('rejects a URL whose host is a single label, since it can match no list', () => {
+    const { indicators, unparseable } = parseInput('http://localhost/x')
+    expect(indicators).toEqual([])
+    expect(unparseable).toEqual(['http://localhost/x'])
+  })
+
+  it('still accepts URLs whose host is a real domain or IP', () => {
+    const { indicators, unparseable } = parseInput(
+      'https://example.com/a http://8.8.8.8/b https://[2001:db8::1]/c',
+    )
+    expect(indicators.map((i) => [i.normalized, i.type])).toEqual([
+      ['example.com', 'domain'],
+      ['8.8.8.8', 'ipv4'],
+      ['2001:db8::1', 'ipv6'],
+    ])
+    expect(unparseable).toEqual([])
+  })
+
   it('strips surrounding quotes and trailing punctuation', () => {
     const { indicators } = parseInput('"example.com", \'8.8.8.8\'')
     expect(indicators.map((i) => i.normalized)).toEqual(['example.com', '8.8.8.8'])

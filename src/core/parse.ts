@@ -122,7 +122,6 @@ export function parseInput(raw: string): {
         unparseable.push(token)
         continue
       }
-      normalized = host
       // Re-derive the type from the host we actually match on. A URL is only a
       // carrier: "http://1.1.1.1/x" reduces to an IP literal, and if the type
       // stayed 'url' it would be excluded from every CIDR list by both
@@ -130,8 +129,21 @@ export function parseInput(raw: string): {
       // reported with the reserved word "clean" at full coverage. Re-deriving
       // also keeps dedupe consistent: a URL and a bare IP for the same host
       // collapse into one indicator with one correct type.
+      //
+      // If the host is not itself a valid indicator, the token was never one.
+      // classify() sends anything containing "/" down this path, so plain text
+      // like "coverage=123/123" or "foo/bar" arrives here and the URL parser
+      // happily yields a "host" of "coverage=123". Reporting that as an
+      // indicator is worse than useless: it can match no list, so it renders
+      // as a confident zero-hit result. Treat it as unparseable instead, which
+      // surfaces it to the analyst rather than dropping it.
       const hostType = classify(host)
-      type = hostType === 'unparseable' ? 'url' : hostType
+      if (hostType === 'unparseable') {
+        unparseable.push(token)
+        continue
+      }
+      normalized = host
+      type = hostType
     } else {
       normalized = candidate.toLowerCase()
     }
