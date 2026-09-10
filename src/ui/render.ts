@@ -9,7 +9,7 @@ export const TIER_META: Record<Tier, { label: string; caption: string; order: nu
   },
   infrastructure: {
     label: 'Known infrastructure',
-    caption: 'Belongs to a major cloud, CDN, or public resolver. Strong reason to deprioritise.',
+    caption: 'Belongs to provider-operated infrastructure such as a CDN or public resolver.',
     order: 1,
   },
   context: {

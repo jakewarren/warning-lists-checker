@@ -16,22 +16,19 @@ const HEAVY = new Set([
 ])
 
 const INFRASTRUCTURE = new Set([
-  'akamai', 'amazon-aws', 'apple', 'cloudflare', 'fastly', 'github', 'google',
-  'google-gcp', 'google-gmail-sending-ips', 'googlebot', 'microsoft',
-  'microsoft-azure', 'microsoft-azure-appid', 'microsoft-azure-china',
-  'microsoft-azure-germany', 'microsoft-azure-us-gov', 'microsoft-office365',
+  'akamai', 'apple', 'cloudflare', 'fastly', 'github', 'google',
+  'google-gmail-sending-ips', 'googlebot', 'microsoft',
+  'microsoft-azure-appid', 'microsoft-office365',
   'microsoft-office365-cn', 'microsoft-office365-ip',
   'microsoft-win10-connection-endpoints', 'mozilla-CA', 'mozilla-IntermediateCA',
-  'ovh-cluster', 'public-dns-hostname', 'public-dns-v4', 'public-dns-v6',
+  'public-dns-hostname', 'public-dns-v4', 'public-dns-v6',
   'smtp-receiving-ips', 'smtp-sending-ips', 'stackpath', 'telegram-ips',
   'tenable-cloud-ipv4', 'tenable-cloud-ipv6', 'wikimedia', 'zscaler',
   'crl-hostname', 'crl-ip', 'captive-portals', 'openai-gptbot',
-  'alibaba-cloud', 'apple-domains', 'apple-ipv4', 'apple-ipv6', 'bunny-net',
-  'cachefly', 'cdn77', 'coreweave', 'digitalocean', 'gcore', 'godaddy',
-  'hetzner', 'huawei-cloud', 'ibm-cloud', 'imperva', 'leaseweb', 'linode',
-  'microsoft-mdca-proxy', 'microsoft-win11-connection-endpoints', 'oracle-oci',
-  'palo-alto-networks-cortex-cloud', 'rackspace', 'salesforce', 'scaleway',
-  'sucuri', 'tencent-cloud', 'vultr',
+  'apple-domains', 'apple-ipv4', 'apple-ipv6', 'bunny-net', 'cachefly', 'cdn77',
+  'gcore', 'imperva', 'microsoft-mdca-proxy',
+  'microsoft-win11-connection-endpoints', 'palo-alto-networks-cortex-cloud',
+  'salesforce', 'sucuri',
 ])
 
 const KNOWN_FP = new Set([
@@ -63,6 +60,12 @@ const CONTEXT = new Set([
   'umich-cse-connection-attempts', 'palo-alto-networks-cortex-xpanse',
   'common-contact-emails', 'phone_numbers',
   'tor-exit-nodes', 'icloud-private-relay', 'driftnet',
+  // These ranges identify a hosting provider, not whether its current tenant is benign.
+  'alibaba-cloud', 'amazon-aws', 'coreweave', 'digitalocean', 'godaddy',
+  'google-gcp', 'hetzner', 'huawei-cloud', 'ibm-cloud', 'leaseweb', 'linode',
+  'microsoft-azure', 'microsoft-azure-china', 'microsoft-azure-germany',
+  'microsoft-azure-us-gov', 'oracle-oci', 'ovh-cluster', 'rackspace',
+  'scaleway', 'tencent-cloud', 'vultr',
 ])
 
 /**

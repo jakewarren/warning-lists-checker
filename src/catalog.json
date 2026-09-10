@@ -90,7 +90,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 8157
   },
@@ -138,7 +138,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 96766
   },
@@ -741,7 +741,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 813
   },
@@ -1051,7 +1051,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 5977
   },
@@ -1294,7 +1294,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 4371
   },
@@ -1340,7 +1340,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 10915
   },
@@ -1436,7 +1436,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 4889017
   },
@@ -1452,7 +1452,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 6377
   },
@@ -1484,7 +1484,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 6088
   },
@@ -1820,7 +1820,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 32293
   },
@@ -1851,7 +1851,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 6834
   },
@@ -1944,7 +1944,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 58853
   },
@@ -1972,7 +1972,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 3988
   },
@@ -1988,7 +1988,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 1131
   },
@@ -2004,7 +2004,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 4508
   },
@@ -2356,7 +2356,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 18906
   },
@@ -2372,7 +2372,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 16375
   },
@@ -2590,7 +2590,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 4048
   },
@@ -2812,7 +2812,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 934
   },
@@ -3162,7 +3162,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 6560
   },
@@ -3409,7 +3409,7 @@
       "ip-src|port",
       "ip-dst|port"
     ],
-    "tier": "infrastructure",
+    "tier": "context",
     "loadTier": "core",
     "bytes": 3983
   },

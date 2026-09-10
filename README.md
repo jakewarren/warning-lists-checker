@@ -45,7 +45,7 @@ very different things. Two are easy to misread, so the UI labels them explicitly
 | Tier | Meaning |
 |---|---|
 | **Known false positive** | Curated as a common FP. Strong reason to deprioritise. |
-| **Known infrastructure** | Major cloud, CDN or public resolver. Strong reason to deprioritise. |
+| **Known infrastructure** | Provider-operated infrastructure such as a CDN or public resolver. |
 | **Context — look closer** | Dynamic DNS, VPN ranges, Tor exits, internet scanners. **Not** a safety signal — a reason to investigate further. |
 | **High-traffic site** | Informational only. **Popular does not mean safe.** |
 

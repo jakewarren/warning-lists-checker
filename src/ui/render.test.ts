@@ -23,6 +23,10 @@ describe('TIER_META', () => {
     expect(TIER_META.context.caption.toLowerCase()).toContain('look closer')
   })
 
+  it('does not tell analysts to deprioritise infrastructure hits', () => {
+    expect(TIER_META.infrastructure.caption.toLowerCase()).not.toContain('deprioritise')
+  })
+
   it('orders strong false-positive signals before informational ones', () => {
     expect(TIER_META['known-fp'].order).toBeLessThan(TIER_META.popularity.order)
     expect(TIER_META.infrastructure.order).toBeLessThan(TIER_META.popularity.order)

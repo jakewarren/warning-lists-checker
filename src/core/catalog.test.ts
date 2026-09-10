@@ -4,18 +4,25 @@ import catalog from '../catalog.json'
 import { LOAD_TIERS, TIERS, type CatalogEntry } from './types'
 
 describe('assignTier', () => {
-  it('classifies cloud and CDN ranges as infrastructure', () => {
+  it('classifies provider-operated services as infrastructure', () => {
     expect(assignTier('cloudflare', 'cidr', ['ip-src'])).toBe('infrastructure')
-    expect(assignTier('amazon-aws', 'cidr', ['ip-src'])).toBe('infrastructure')
-    expect(assignTier('microsoft-azure', 'cidr', ['ip-src'])).toBe('infrastructure')
     expect(assignTier('public-dns-v4', 'cidr', ['ip-src'])).toBe('infrastructure')
     expect(assignTier('apple-domains', 'hostname', ['domain'])).toBe('infrastructure')
     expect(assignTier('apple-ipv4', 'cidr', ['ip-src'])).toBe('infrastructure')
     expect(assignTier('apple-ipv6', 'cidr', ['ip-src'])).toBe('infrastructure')
-    expect(assignTier('oracle-oci', 'cidr', ['ip-src'])).toBe('infrastructure')
     expect(assignTier('bunny-net', 'cidr', ['ip-src'])).toBe('infrastructure')
     expect(assignTier('microsoft-mdca-proxy', 'hostname', ['domain'])).toBe('infrastructure')
     expect(assignTier('palo-alto-networks-cortex-cloud', 'cidr', ['ip-src'])).toBe('infrastructure')
+  })
+
+  it.each([
+    'alibaba-cloud', 'amazon-aws', 'coreweave', 'digitalocean', 'godaddy',
+    'google-gcp', 'hetzner', 'huawei-cloud', 'ibm-cloud', 'leaseweb', 'linode',
+    'microsoft-azure', 'microsoft-azure-china', 'microsoft-azure-germany',
+    'microsoft-azure-us-gov', 'oracle-oci', 'ovh-cluster', 'rackspace',
+    'scaleway', 'tencent-cloud', 'vultr',
+  ])('classifies tenant-rentable provider %s as context', (name) => {
+    expect(assignTier(name, 'cidr', ['ip-src'])).toBe('context')
   })
 
   it('classifies curated false-positive lists as known-fp', () => {
