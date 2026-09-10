@@ -14,9 +14,9 @@ export const HOST_ATTRS = new Set([
 ])
 
 /**
- * A composite attribute covering both families at once. It appears on 105 of
- * 123 lists, so it carries almost no signal on its own and must be
- * disambiguated by the list's own type in both directions.
+ * A composite attribute covering both families at once. It appears on both
+ * CIDR and hostname lists, so it carries no family signal on its own and must
+ * be disambiguated by the list's own type in both directions.
  */
 const COMPOSITE = 'domain|ip'
 

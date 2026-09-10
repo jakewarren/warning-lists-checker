@@ -8,20 +8,27 @@ const RAW = 'https://raw.githubusercontent.com/MISP/misp-warninglists/main'
 /** Lists excluded entirely: file-hash lists, out of scope for v1. */
 const EXCLUDED = new Set(['windows-binary-hashes', 'nioc-filehash'])
 
-/** Only these two are large enough to defer behind an opt-in. */
-const HEAVY = new Set(['tranco', 'google-chrome-crux-1million'])
+/** Multi-megabyte popularity rankings deferred behind the opt-in. */
+const HEAVY = new Set([
+  'tranco', 'google-chrome-crux-1million', 'cisco_top1m',
+  'cloudflare-top100k', 'cloudflare-top200k', 'cloudflare-top500k',
+  'cloudflare-top1m',
+])
 
 const INFRASTRUCTURE = new Set([
-  'akamai', 'amazon-aws', 'apple', 'cloudflare', 'fastly', 'github', 'google',
-  'google-gcp', 'google-gmail-sending-ips', 'googlebot', 'microsoft',
-  'microsoft-azure', 'microsoft-azure-appid', 'microsoft-azure-china',
-  'microsoft-azure-germany', 'microsoft-azure-us-gov', 'microsoft-office365',
+  'akamai', 'apple', 'cloudflare', 'fastly', 'github', 'google',
+  'google-gmail-sending-ips', 'googlebot', 'microsoft',
+  'microsoft-azure-appid', 'microsoft-office365',
   'microsoft-office365-cn', 'microsoft-office365-ip',
   'microsoft-win10-connection-endpoints', 'mozilla-CA', 'mozilla-IntermediateCA',
-  'ovh-cluster', 'public-dns-hostname', 'public-dns-v4', 'public-dns-v6',
+  'public-dns-hostname', 'public-dns-v4', 'public-dns-v6',
   'smtp-receiving-ips', 'smtp-sending-ips', 'stackpath', 'telegram-ips',
   'tenable-cloud-ipv4', 'tenable-cloud-ipv6', 'wikimedia', 'zscaler',
   'crl-hostname', 'crl-ip', 'captive-portals', 'openai-gptbot',
+  'apple-domains', 'apple-ipv4', 'apple-ipv6', 'bunny-net', 'cachefly', 'cdn77',
+  'gcore', 'imperva', 'microsoft-mdca-proxy',
+  'microsoft-win11-connection-endpoints', 'palo-alto-networks-cortex-cloud',
+  'salesforce', 'sucuri',
 ])
 
 const KNOWN_FP = new Set([
@@ -37,6 +44,10 @@ const POPULARITY = new Set([
   'alexa', 'cisco_top1000', 'cisco_top5k', 'cisco_top10k', 'cisco_top20k',
   'google-chrome-crux-1million', 'majestic_million', 'moz-top500', 'tranco',
   'tranco10k',
+  'cisco_top1m', 'cloudflare-top200', 'cloudflare-top1k', 'cloudflare-top2k',
+  'cloudflare-top5k', 'cloudflare-top10k', 'cloudflare-top20k',
+  'cloudflare-top50k', 'cloudflare-top100k', 'cloudflare-top200k',
+  'cloudflare-top500k', 'cloudflare-top1m',
 ])
 
 const CONTEXT = new Set([
@@ -48,6 +59,13 @@ const CONTEXT = new Set([
   'umbrella-blockpage-hostname', 'umbrella-blockpage-v4', 'umbrella-blockpage-v6',
   'umich-cse-connection-attempts', 'palo-alto-networks-cortex-xpanse',
   'common-contact-emails', 'phone_numbers',
+  'tor-exit-nodes', 'icloud-private-relay', 'driftnet',
+  // These ranges identify a hosting provider, not whether its current tenant is benign.
+  'alibaba-cloud', 'amazon-aws', 'coreweave', 'digitalocean', 'godaddy',
+  'google-gcp', 'hetzner', 'huawei-cloud', 'ibm-cloud', 'leaseweb', 'linode',
+  'microsoft-azure', 'microsoft-azure-china', 'microsoft-azure-germany',
+  'microsoft-azure-us-gov', 'oracle-oci', 'ovh-cluster', 'rackspace',
+  'scaleway', 'tencent-cloud', 'vultr',
 ])
 
 /**
