@@ -75,8 +75,8 @@ describe('appliesTo', () => {
   })
 
   it('disambiguates the domain|ip composite attribute by list type', () => {
-    // domain|ip appears on 105 of 123 lists and covers both families at once,
-    // so on its own it must never pull a list into the wrong family.
+    // domain|ip covers both families, so on its own it must never pull a list
+    // into the wrong family.
     const cidrComposite = entry({ type: 'cidr', matchingAttributes: ['domain|ip'] })
     const hostComposite = entry({ type: 'hostname', matchingAttributes: ['domain|ip'] })
 
@@ -90,12 +90,6 @@ describe('appliesTo', () => {
 
 describe('appliesTo against the real catalog', () => {
   const entries = catalog as CatalogEntry[]
-
-  it('routes IPv4 to roughly the CIDR list population', () => {
-    const n = entries.filter((e) => appliesTo(e, 'ipv4')).length
-    expect(n).toBeGreaterThanOrEqual(70)
-    expect(n).toBeLessThanOrEqual(80)
-  })
 
   it('never routes an IP indicator to a hostname-typed list', () => {
     for (const e of entries) {

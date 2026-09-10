@@ -139,25 +139,25 @@ describe('coverageLabel', () => {
 })
 
 describe('engine performance', () => {
-  it('matches 10,000 IPs against 74 CIDR lists in under 2 seconds', () => {
-    const bigCatalog: CatalogEntry[] = Array.from({ length: 74 }, (_, i) =>
+  it('matches 10,000 IPs against 159 CIDR lists in under 2 seconds', () => {
+    const bigCatalog: CatalogEntry[] = Array.from({ length: 159 }, (_, i) =>
       cat({ name: `list${i}`, type: 'cidr', matchingAttributes: ['ip-src'] }),
     )
     const engine = createEngine(bigCatalog)
 
     // 1,000 ranges per list, non-overlapping.
     const lists = new Map<string, CachedList>()
-    for (let i = 0; i < 74; i++) {
+    for (let i = 0; i < 159; i++) {
       const entries = Array.from({ length: 1000 }, (_, j) => `${(j % 200) + 10}.${i}.${j % 256}.0/24`)
       lists.set(`list${i}`, cached(`list${i}`, entries))
     }
     engine.ingest(lists)
 
     const input = Array.from({ length: 10_000 }, (_, i) =>
-      `${(i % 200) + 10}.${i % 74}.${i % 256}.${i % 254}`,
+      `${(i % 200) + 10}.${i % 159}.${i % 256}.${i % 254}`,
     ).join('\n')
 
-    const cov: Coverage = { loaded: 74, total: 74, failed: [], heavyLoaded: false, oldestFetchedAt: 1 }
+    const cov: Coverage = { loaded: 159, total: 159, failed: [], heavyLoaded: false, oldestFetchedAt: 1 }
     const t0 = performance.now()
     const rep = engine.run(input, cov)
     const elapsed = performance.now() - t0

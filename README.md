@@ -15,11 +15,13 @@ and as a VPN range worth a closer look; a defanged Tor exit node URL recognised 
 IPv4 indicator; example.com hitting a known false positive, known infrastructure and
 five popularity lists; and an unknown domain reported clean.](docs/images/screenshot.png)
 
+Screenshot from the initial catalog.
+
 ## The problem it solves
 
 An analyst triaging a batch of indicators has no fast way to tell which ones are noise.
 `8.8.8.8` is a public resolver, `13.107.42.14` is Microsoft, half the domains in a report
-are CDN infrastructure. MISP already curates exactly this data across 123 lists. This is
+are CDN infrastructure. MISP already curates exactly this data across 223 in-scope lists. This is
 a front-end for it — paste, scan, move on to what actually matters.
 
 ## Features
@@ -32,8 +34,8 @@ a front-end for it — paste, scan, move on to what actually matters.
   **"copy clean only"** for the shortlist worth investigating.
 - **Works offline after first load.** Lists are cached in IndexedDB; a failed refresh
   degrades to stale data with a visible warning rather than a dead app.
-- **Fast.** 10,000 IPs against all 74 CIDR lists benchmarks at ~260 ms, pinned by a
-  test so it cannot silently regress.
+- **Fast.** A synthetic benchmark checks 10,000 IPs against 159 CIDR lists in under
+  2 seconds, enforced by a regression test.
 
 ## Reading the results
 
@@ -58,9 +60,13 @@ verdict is the worst thing a tool like this can produce, so the word is reserved
 
 ## How it works
 
-- A generated `src/catalog.json` describes the 123 in-scope lists — their name, MISP
+- A generated `src/catalog.json` describes the 223 in-scope lists — their name, MISP
   type, matching attributes and tier. It ships with the app, so no discovery requests are
-  needed before the first match.
+  needed before the first match. The 216 core lists load by default; seven large
+  popularity rankings load only when requested.
+- Distinct upstream lists remain separate even when their contents overlap. For example,
+  `apple`, `apple-ipv4`, `apple-ipv6` and `apple-domains` cover different or overlapping
+  parts of Apple's infrastructure, and scanner lists can use independent sources.
 - List bodies are fetched directly from `raw.githubusercontent.com` (which serves
   gzip and permissive CORS) and cached in IndexedDB with age-based decay: fresh under
   24h, stale-while-revalidate to 7 days, blocking refetch beyond that — always falling
@@ -88,11 +94,15 @@ npm run build:catalog  # regenerate src/catalog.json from upstream
 CI job diffs upstream against it and opens an issue when MISP adds a list, so the shipped
 catalog does not quietly fall behind.
 
+After regenerating, review the tier assignments in `scripts/build-catalog.ts`, including
+which large popularity rankings belong behind the opt-in. Update the catalog test counts
+if needed, then run `npm test` and `npm run build` before committing.
+
 ## Credits
 
 This tool is a front-end. **All of the actual intelligence comes from the
 [MISP project](https://www.misp-project.org/)** and the contributors who maintain
-[MISP/misp-warninglists](https://github.com/MISP/misp-warninglists) — curating 123 lists
+[MISP/misp-warninglists](https://github.com/MISP/misp-warninglists) — curating lists
 of known-good infrastructure, common false positives, scanners and popularity rankings is
 the hard part, and they have been doing it for years.
 

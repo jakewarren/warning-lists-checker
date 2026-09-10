@@ -8,8 +8,12 @@ const RAW = 'https://raw.githubusercontent.com/MISP/misp-warninglists/main'
 /** Lists excluded entirely: file-hash lists, out of scope for v1. */
 const EXCLUDED = new Set(['windows-binary-hashes', 'nioc-filehash'])
 
-/** Only these two are large enough to defer behind an opt-in. */
-const HEAVY = new Set(['tranco', 'google-chrome-crux-1million'])
+/** Multi-megabyte popularity rankings deferred behind the opt-in. */
+const HEAVY = new Set([
+  'tranco', 'google-chrome-crux-1million', 'cisco_top1m',
+  'cloudflare-top100k', 'cloudflare-top200k', 'cloudflare-top500k',
+  'cloudflare-top1m',
+])
 
 const INFRASTRUCTURE = new Set([
   'akamai', 'amazon-aws', 'apple', 'cloudflare', 'fastly', 'github', 'google',
@@ -22,6 +26,12 @@ const INFRASTRUCTURE = new Set([
   'smtp-receiving-ips', 'smtp-sending-ips', 'stackpath', 'telegram-ips',
   'tenable-cloud-ipv4', 'tenable-cloud-ipv6', 'wikimedia', 'zscaler',
   'crl-hostname', 'crl-ip', 'captive-portals', 'openai-gptbot',
+  'alibaba-cloud', 'apple-domains', 'apple-ipv4', 'apple-ipv6', 'bunny-net',
+  'cachefly', 'cdn77', 'coreweave', 'digitalocean', 'gcore', 'godaddy',
+  'hetzner', 'huawei-cloud', 'ibm-cloud', 'imperva', 'leaseweb', 'linode',
+  'microsoft-mdca-proxy', 'microsoft-win11-connection-endpoints', 'oracle-oci',
+  'palo-alto-networks-cortex-cloud', 'rackspace', 'salesforce', 'scaleway',
+  'sucuri', 'tencent-cloud', 'vultr',
 ])
 
 const KNOWN_FP = new Set([
@@ -37,6 +47,10 @@ const POPULARITY = new Set([
   'alexa', 'cisco_top1000', 'cisco_top5k', 'cisco_top10k', 'cisco_top20k',
   'google-chrome-crux-1million', 'majestic_million', 'moz-top500', 'tranco',
   'tranco10k',
+  'cisco_top1m', 'cloudflare-top200', 'cloudflare-top1k', 'cloudflare-top2k',
+  'cloudflare-top5k', 'cloudflare-top10k', 'cloudflare-top20k',
+  'cloudflare-top50k', 'cloudflare-top100k', 'cloudflare-top200k',
+  'cloudflare-top500k', 'cloudflare-top1m',
 ])
 
 const CONTEXT = new Set([
@@ -48,6 +62,7 @@ const CONTEXT = new Set([
   'umbrella-blockpage-hostname', 'umbrella-blockpage-v4', 'umbrella-blockpage-v6',
   'umich-cse-connection-attempts', 'palo-alto-networks-cortex-xpanse',
   'common-contact-emails', 'phone_numbers',
+  'tor-exit-nodes', 'icloud-private-relay', 'driftnet',
 ])
 
 /**

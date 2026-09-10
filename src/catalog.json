@@ -1,5 +1,53 @@
 [
   {
+    "name": "a10networks-scanning",
+    "title": "A10 Networks (a10protects.com / a10networks.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation A10 Networks (a10protects.com / a10networks.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 16688
+  },
+  {
+    "name": "academyforinternetresearch-scanning",
+    "title": "Academy for Internet Research (academyforinternetresearch.org) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Academy for Internet Research (academyforinternetresearch.org), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 2032
+  },
+  {
+    "name": "adscore-scanning",
+    "title": "Adscore (adscore.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Adscore (adscore.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 785
+  },
+  {
     "name": "akamai",
     "title": "List of known Akamai IP ranges",
     "description": "Akamai IP ranges from BGP search",
@@ -13,7 +61,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 6444
+    "bytes": 8366
   },
   {
     "name": "alexa",
@@ -31,9 +79,25 @@
     "bytes": 19366
   },
   {
+    "name": "alibaba-cloud",
+    "title": "List of known Alibaba Cloud IP address ranges",
+    "description": "Alibaba Cloud (Aliyun) IPv4 and IPv6 ranges, from the prefixes its verified autonomous systems announce, read live from the RIPEstat Data API (https://stat.ripe.net/). Alibaba Cloud publishes no address-space feed of its own. This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 8157
+  },
+  {
     "name": "alphastrike-research-nt-scanning",
     "title": "Alphastrike research IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Alphastrike research scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Alphastrike research scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -60,7 +124,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 513
+    "bytes": 588
   },
   {
     "name": "amazon-aws",
@@ -76,7 +140,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 95159
+    "bytes": 96766
   },
   {
     "name": "apple",
@@ -95,6 +159,53 @@
     "bytes": 351
   },
   {
+    "name": "apple-domains",
+    "title": "List of known Apple hosts for enterprise networks",
+    "description": "Hosts that Apple products need to access on enterprise networks, merged from Apple's support article (https://support.apple.com/en-us/101555) and the v2fly domain-list-community 'apple' data set (and its includes).",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "domain|ip",
+      "url"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 49518
+  },
+  {
+    "name": "apple-ipv4",
+    "title": "List of known Apple IPv4 ranges",
+    "description": "Apple IPv4 ranges announced by AS714 and AS6185",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 394
+  },
+  {
+    "name": "apple-ipv6",
+    "title": "List of known Apple IPv6 ranges",
+    "description": "Apple IPv6 ranges announced by AS714 and AS6185",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 397
+  },
+  {
     "name": "automated-malware-analysis",
     "title": "List of known domains used by automated malware analysis services & security vendors",
     "description": "Domains used by automated malware analysis services & security vendors",
@@ -107,7 +218,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 932
+    "bytes": 1438
   },
   {
     "name": "bank-website",
@@ -122,12 +233,44 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 50779
+    "bytes": 50786
+  },
+  {
+    "name": "binaryedge-scanning",
+    "title": "BinaryEdge (binaryedge.io / binaryedge.ninja) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation BinaryEdge (binaryedge.io / binaryedge.ninja), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 396611
+  },
+  {
+    "name": "bitsight-scanning",
+    "title": "BitSight Technologies Inc. / Internet Census Group (bitsight.com / internet-census.org) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation BitSight Technologies Inc. / Internet Census Group (bitsight.com / internet-census.org), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 682
   },
   {
     "name": "bufferover-nt-scanning",
     "title": "Bufferover IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Bufferover scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Bufferover scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -139,6 +282,54 @@
     "tier": "context",
     "loadTier": "core",
     "bytes": 1146
+  },
+  {
+    "name": "bufferoverrun-scanning",
+    "title": "bufferover.run / erbbysam (bufferover.run) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation bufferover.run / erbbysam (bufferover.run), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1608
+  },
+  {
+    "name": "bunny-net",
+    "title": "List of known Bunny.net CDN ranges",
+    "description": "List of known Bunny.net CDN IP ranges (https://support.bunny.net/hc/en-us/articles/115003578911-How-to-detect-when-BunnyCDN-PoP-servers-are-accessing-your-backend)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 22408
+  },
+  {
+    "name": "cachefly",
+    "title": "List of known CacheFly IP address ranges",
+    "description": "CacheFly IP address ranges (https://cachefly.cachefly.net/ips/cdn.txt)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 554
   },
   {
     "name": "captive-portals",
@@ -156,6 +347,22 @@
     "bytes": 946
   },
   {
+    "name": "cdn77",
+    "title": "List of known CDN77 IP address ranges",
+    "description": "CDN77 IP address ranges (https://prefixlists.tools.cdn77.com/public_lmax_prefixes.json)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1176
+  },
+  {
     "name": "censys-scanning",
     "title": "Censys IP Ranges Used for Scanning",
     "description": "List containing IP's associated with Censys scanning [https://support.censys.io/hc/en-us/articles/360043177092-Opt-Out-of-Data-Collection#Can_I_opt_out_of_Censys_data_collection?]",
@@ -169,7 +376,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 743
+    "bytes": 975
   },
   {
     "name": "check-host-net",
@@ -179,11 +386,41 @@
     "matchingAttributes": [
       "ip-src",
       "ip-dst",
-      "domain|ip"
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1293
+    "bytes": 1679
+  },
+  {
+    "name": "circl-security-scanning",
+    "title": "CIRCL IP address used for security scanning",
+    "description": "CIRCL IP address to conducting non-intrusive security scans on Luxembourg IP addresses",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "domain|ip",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 775
+  },
+  {
+    "name": "circl-ssh-scanning",
+    "title": "CIRCL IP address used for SSH scanning",
+    "description": "CIRCL IP address to conducting non-intrusive SSH scans",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "domain|ip",
+      "ip-src|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 315
   },
   {
     "name": "cisco_top1000",
@@ -198,7 +435,7 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 28210
+    "bytes": 28245
   },
   {
     "name": "cisco_top10k",
@@ -213,7 +450,22 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 306741
+    "bytes": 309780
+  },
+  {
+    "name": "cisco_top1m",
+    "title": "Top 1 000 000 websites from Cisco Umbrella",
+    "description": "Event contains one or more entries from the top 1 000 000 of the most used websites (Cisco Umbrella).",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 33839056
   },
   {
     "name": "cisco_top20k",
@@ -228,7 +480,7 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 635769
+    "bytes": 638958
   },
   {
     "name": "cisco_top5k",
@@ -243,7 +495,7 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 148596
+    "bytes": 149415
   },
   {
     "name": "cloudflare",
@@ -262,9 +514,174 @@
     "bytes": 801
   },
   {
+    "name": "cloudflare-top100k",
+    "title": "Top 100,000 domains from Cloudflare Radar",
+    "description": "List of top 100,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 2101874
+  },
+  {
+    "name": "cloudflare-top10k",
+    "title": "Top 10,000 domains from Cloudflare Radar",
+    "description": "List of top 10,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 201108
+  },
+  {
+    "name": "cloudflare-top1k",
+    "title": "Top 1,000 domains from Cloudflare Radar",
+    "description": "List of top 1,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 20268
+  },
+  {
+    "name": "cloudflare-top1m",
+    "title": "Top 1,000,000 domains from Cloudflare Radar",
+    "description": "List of top 1,000,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 21904660
+  },
+  {
+    "name": "cloudflare-top200",
+    "title": "Top 200 domains from Cloudflare Radar",
+    "description": "List of top 200 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 4410
+  },
+  {
+    "name": "cloudflare-top200k",
+    "title": "Top 200,000 domains from Cloudflare Radar",
+    "description": "List of top 200,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 4279178
+  },
+  {
+    "name": "cloudflare-top20k",
+    "title": "Top 20,000 domains from Cloudflare Radar",
+    "description": "List of top 20,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 405226
+  },
+  {
+    "name": "cloudflare-top2k",
+    "title": "Top 2,000 domains from Cloudflare Radar",
+    "description": "List of top 2,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 40395
+  },
+  {
+    "name": "cloudflare-top500k",
+    "title": "Top 500,000 domains from Cloudflare Radar",
+    "description": "List of top 500,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "heavy",
+    "bytes": 10849879
+  },
+  {
+    "name": "cloudflare-top50k",
+    "title": "Top 50,000 domains from Cloudflare Radar",
+    "description": "List of top 50,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 1032416
+  },
+  {
+    "name": "cloudflare-top5k",
+    "title": "Top 5,000 domains from Cloudflare Radar",
+    "description": "List of top 5,000 domains from Cloudflare Radar (https://developers.cloudflare.com/radar/investigate/domain-ranking-datasets/)",
+    "type": "string",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "popularity",
+    "loadTier": "core",
+    "bytes": 100219
+  },
+  {
     "name": "coalition-signals-intelligence-nt-scanning",
     "title": "Coalition signals intelligence IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Coalition signals intelligence scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Coalition signals intelligence scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -275,7 +692,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 38624
+    "bytes": 32625
   },
   {
     "name": "common-contact-emails",
@@ -310,7 +727,23 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 4121
+    "bytes": 4128
+  },
+  {
+    "name": "coreweave",
+    "title": "List of known CoreWeave IP address ranges",
+    "description": "CoreWeave IP address ranges, from the prefixes announced by the autonomous systems held by CoreWeave, Inc (AS33425, AS46992) as reported by the RIPEstat Data API. This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 813
   },
   {
     "name": "covid",
@@ -324,7 +757,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 9497
+    "bytes": 9504
   },
   {
     "name": "covid-19-cyber-threat-coalition-whitelist",
@@ -355,6 +788,22 @@
     "bytes": 3118
   },
   {
+    "name": "criminalip-scanning",
+    "title": "Criminal IP / AiSpera (criminalip.com / aispera.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Criminal IP / AiSpera (criminalip.com / aispera.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 496
+  },
+  {
     "name": "crl-hostname",
     "title": "CRL and OCSP domains",
     "description": "Domains that belongs to CRL or OCSP",
@@ -366,7 +815,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 228
+    "bytes": 6755
   },
   {
     "name": "crl-ip",
@@ -382,7 +831,39 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 272
+    "bytes": 11345
+  },
+  {
+    "name": "crowdstrikefalconsurface-scanning",
+    "title": "CrowdStrike Falcon Surface (crowdstrike.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation CrowdStrike Falcon Surface (crowdstrike.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 586
+  },
+  {
+    "name": "cybcube-scanning",
+    "title": "CyberCube (cybcube.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation CyberCube (cybcube.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 536
   },
   {
     "name": "cybergreen-nt-scanning",
@@ -401,9 +882,41 @@
     "bytes": 421
   },
   {
+    "name": "cybergreen-scanning",
+    "title": "CyberGreen Institute (cybergreen.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation CyberGreen Institute (cybergreen.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 466
+  },
+  {
+    "name": "cyberok-scanning",
+    "title": "CyberOK (cyberok.ru) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation CyberOK (cyberok.ru), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 431
+  },
+  {
     "name": "cyberresilience-nt-scanning",
     "title": "Cyberresilience IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Cyberresilience scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Cyberresilience scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -415,6 +928,22 @@
     "tier": "context",
     "loadTier": "core",
     "bytes": 774
+  },
+  {
+    "name": "cyberresilience-scanning",
+    "title": "CyberResilience (cyberresilience.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation CyberResilience (cyberresilience.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 807
   },
   {
     "name": "cypex-nt-scanning",
@@ -433,6 +962,38 @@
     "bytes": 625
   },
   {
+    "name": "cypex-scanning",
+    "title": "Cypex (cypex.ai) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Cypex (cypex.ai), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 890
+  },
+  {
+    "name": "dataplane-scanning",
+    "title": "Dataplane.org (dataplane.org) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Dataplane.org (dataplane.org), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 548
+  },
+  {
     "name": "dax30",
     "title": "List of known dax30 webpages",
     "description": "Event contains one or more entries of known dax30 webpages",
@@ -444,7 +1005,55 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 524
+    "bytes": 531
+  },
+  {
+    "name": "deepfield-scanning",
+    "title": "Nokia Deepfield (deepfield.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Nokia Deepfield (deepfield.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1801
+  },
+  {
+    "name": "detectify-scanning",
+    "title": "Detectify (detectify.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Detectify (detectify.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 673
+  },
+  {
+    "name": "digitalocean",
+    "title": "List of known DigitalOcean IP address ranges",
+    "description": "DigitalOcean IP address ranges, from their published RFC 8805 geofeed (https://digitalocean.com/geo/google.csv)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 5977
   },
   {
     "name": "digitalside",
@@ -473,7 +1082,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 169058
+    "bytes": 185911
+  },
+  {
+    "name": "driftnet",
+    "title": "List of known Driftnet / Internet-Measurement IP ranges (https://internet-measurement.com/)",
+    "description": "Driftnet / Internet-Measurement IP address ranges (https://internet-measurement.com/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1764
   },
   {
     "name": "dynamic-dns",
@@ -487,7 +1112,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 807387
+    "bytes": 1038403
+  },
+  {
+    "name": "edgewatch-scanning",
+    "title": "Edgewatch Security Intelligence (edgewatch.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Edgewatch Security Intelligence (edgewatch.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 486
   },
   {
     "name": "eicar.com",
@@ -506,7 +1147,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 1445
+    "bytes": 1452
   },
   {
     "name": "empty-hashes",
@@ -529,12 +1170,28 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 811
+    "bytes": 818
+  },
+  {
+    "name": "eset-scanning",
+    "title": "ESET Research (eset.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation ESET Research (eset.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 441
   },
   {
     "name": "f6-nt-scanning",
     "title": "F6 IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the F6 scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the F6 scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -561,7 +1218,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 737
+    "bytes": 784
   },
   {
     "name": "findip-host",
@@ -575,7 +1232,39 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 890
+    "bytes": 1043
+  },
+  {
+    "name": "fofa-scanning",
+    "title": "FOFA Search Engine (fofa.info) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation FOFA Search Engine (fofa.info), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 8086
+  },
+  {
+    "name": "gcore",
+    "title": "List of known Gcore CDN IP address ranges",
+    "description": "Gcore CDN IP address ranges (https://api.gcore.com/cdn/public-net-list)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 7748
   },
   {
     "name": "github",
@@ -591,13 +1280,29 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 132342
+    "bytes": 132220
+  },
+  {
+    "name": "godaddy",
+    "title": "List of known GoDaddy IP address ranges",
+    "description": "GoDaddy IP address ranges, collected from the prefixes announced by the autonomous systems of GoDaddy.com, LLC and GoDaddy Host Europe GmbH, via the RIPEstat Data API (https://stat.ripe.net/data/announced-prefixes/data.json). Note this is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 4371
   },
   {
     "name": "google",
     "title": "List of known google domains",
-    "description": "Event contains one or more entries of known google domains",
-    "type": "string",
+    "description": "Event contains one or more entries of known google domains, merged from Google's own supported_domains list, the nickspaargaren/no-google community blocklist, and the v2fly domain-list-community 'google' data set.",
+    "type": "hostname",
     "matchingAttributes": [
       "domain",
       "hostname",
@@ -606,7 +1311,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 13512
+    "bytes": 241731
   },
   {
     "name": "google-chrome-crux-1million",
@@ -621,7 +1326,7 @@
     ],
     "tier": "popularity",
     "loadTier": "heavy",
-    "bytes": 25510633
+    "bytes": 25466362
   },
   {
     "name": "google-gcp",
@@ -637,7 +1342,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 10424
+    "bytes": 10915
   },
   {
     "name": "google-gmail-sending-ips",
@@ -669,12 +1374,172 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 2065
+    "bytes": 1913
+  },
+  {
+    "name": "groupib-scanning",
+    "title": "Group-IB (rnd.group-ib.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Group-IB (rnd.group-ib.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 585
+  },
+  {
+    "name": "hackertarget-scanning",
+    "title": "Hacker Target Pty Ltd (hackertarget.com / hackertarget.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Hacker Target Pty Ltd (hackertarget.com / hackertarget.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 561
+  },
+  {
+    "name": "hadrian-scanning",
+    "title": "Hadrian (hdrn.nu / hadrian.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Hadrian (hdrn.nu / hadrian.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 613
+  },
+  {
+    "name": "hetzner",
+    "title": "List of known Hetzner IP address ranges",
+    "description": "Hetzner Online GmbH IP address ranges, from their published RFC 8805 geofeed (https://www.hetzner.com/geofeed.csv). This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 4889017
+  },
+  {
+    "name": "huawei-cloud",
+    "title": "List of known Huawei Cloud IP address ranges",
+    "description": "Huawei Cloud IP address ranges, from the RFC 8805 geofeed Huawei publishes for its cloud regions (https://res-static.hc-cdn.cn/cloudbu-site/china/zh-cn/IP-location/google-geo-feed.csv), the file referenced by the geofeed: attribute of Huawei Cloud's own inetnum objects in APNIC whois. This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6377
+  },
+  {
+    "name": "hunter-scanning",
+    "title": "Hunter Search Engine (hunter.how / hunter.qianxin.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Hunter Search Engine (hunter.how / hunter.qianxin.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 83638
+  },
+  {
+    "name": "ibm-cloud",
+    "title": "List of known IBM Cloud IP address ranges",
+    "description": "IBM Cloud (ex-SoftLayer) IP address ranges, from the prefixes announced by its autonomous systems AS36351, AS46702, AS46703, AS46704 as reported by the RIPEstat Data API (https://stat.ripe.net/data/announced-prefixes/data.json). IBM publishes no unauthenticated machine-readable endpoint for these. Scoped to the SOFTLAYER-handle cloud fleet; IBM corporate address space is deliberately excluded. A minority of the announced prefixes are registered to third parties: those are customer / bring-your-own-IP ranges routed out of IBM Cloud's autonomous system and are kept on purpose. This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6088
+  },
+  {
+    "name": "icloud-private-relay",
+    "title": "List of known iCloud Private Relay egress IP address ranges",
+    "description": "iCloud Private Relay egress IP address ranges (https://developer.apple.com/support/prepare-your-network-for-icloud-private-relay/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 407980
+  },
+  {
+    "name": "imperva",
+    "title": "List of known Imperva (Incapsula) IP address ranges",
+    "description": "Imperva (Incapsula) IP address ranges (https://my.imperva.com/api/integration/v1/ips)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 613
+  },
+  {
+    "name": "infrawatch-scanning",
+    "title": "Infrawatch (infrawat.ch / infrawatch.com / infrawatch.app) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Infrawatch (infrawat.ch / infrawatch.com / infrawatch.app), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1222
   },
   {
     "name": "internet-census-nt-scanning",
     "title": "Internet census IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Internet census scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Internet census scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -685,7 +1550,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 6809
+    "bytes": 6884
   },
   {
     "name": "internetcleanup-scanner",
@@ -704,9 +1569,73 @@
     "bytes": 513
   },
   {
+    "name": "internetmeasurementresearch-scanning",
+    "title": "Internet Measurement Research (internetmeasurementresearch.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Internet Measurement Research (internetmeasurementresearch.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 724
+  },
+  {
+    "name": "internetmetrics-scanning",
+    "title": "Internet Metrics (internet-metrics.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Internet Metrics (internet-metrics.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 495
+  },
+  {
+    "name": "internetresearchproject-scanning",
+    "title": "Internet Research Project (internet-research-project.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Internet Research Project (internet-research-project.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 755
+  },
+  {
+    "name": "internettl-scanning",
+    "title": "InterneTTL (internettl.org) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation InterneTTL (internettl.org), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 445
+  },
+  {
     "name": "intrinsec-nt-scanning",
     "title": "Intrinsec IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Intrinsec scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Intrinsec scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -720,9 +1649,41 @@
     "bytes": 463
   },
   {
+    "name": "intrinsec-scanning",
+    "title": "Intrinsec (intrinsec.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Intrinsec (intrinsec.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 534
+  },
+  {
+    "name": "intruder-scanning",
+    "title": "Intruder (intruder.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Intruder (intruder.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1234
+  },
+  {
     "name": "ipinfo-nt-scanning",
     "title": "Ipinfo IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Ipinfo scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Ipinfo scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -733,12 +1694,28 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1004
+    "bytes": 811
+  },
+  {
+    "name": "ipinfo-scanning",
+    "title": "IPinfo Internet Census Data Collection (ipinfo.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation IPinfo Internet Census Data Collection (ipinfo.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 83433
   },
   {
     "name": "ipip-nt-scanning",
     "title": "Ipip IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Ipip scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Ipip scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -749,7 +1726,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 894
+    "bytes": 914
+  },
+  {
+    "name": "ipip-scanning",
+    "title": "IPIP (ipip.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation IPIP (ipip.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1743
   },
   {
     "name": "ipv6-linklocal",
@@ -765,7 +1758,71 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 329
+    "bytes": 336
+  },
+  {
+    "name": "ki3-scanning",
+    "title": "KI3 (ki3.org.cn) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation KI3 (ki3.org.cn), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 588
+  },
+  {
+    "name": "knoq-scanning",
+    "title": "Knoq (knoq.nl) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Knoq (knoq.nl), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 419
+  },
+  {
+    "name": "leakix-scanning",
+    "title": "LeakIX (leakix.org / leakix.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation LeakIX (leakix.org / leakix.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 6282
+  },
+  {
+    "name": "leaseweb",
+    "title": "List of known Leaseweb IP address ranges",
+    "description": "Leaseweb IP address ranges, from the prefixes announced by the autonomous systems held by the Leaseweb group, as reported by the RIPEstat Data API (https://stat.ripe.net). Leaseweb publishes no address-space feed of its own. This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 32293
   },
   {
     "name": "link-in-bio",
@@ -780,7 +1837,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1965
+    "bytes": 1971
+  },
+  {
+    "name": "linode",
+    "title": "List of known Linode (Akamai Connected Cloud) IP address ranges",
+    "description": "Linode (Akamai Connected Cloud) IP address ranges, from their published RFC 8805 geofeed (https://geoip.linode.com/)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6834
   },
   {
     "name": "lots-project",
@@ -801,7 +1874,7 @@
   {
     "name": "majestic_million",
     "title": "Top 10000 websites from Majestic Million",
-    "description": "Event contains one or more entries from the top 10K of the most used websites (Majestic Million).",
+    "description": "Event contains one or more entries from the top 10000 of the most used websites (Majestic Million).",
     "type": "string",
     "matchingAttributes": [
       "hostname",
@@ -809,7 +1882,23 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 200020
+    "bytes": 198058
+  },
+  {
+    "name": "mandiantasm-scanning",
+    "title": "Mandiant ASM / GTI (mandiant.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Mandiant ASM / GTI (mandiant.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 2883
   },
   {
     "name": "microsoft",
@@ -824,7 +1913,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 4898
+    "bytes": 8718
   },
   {
     "name": "microsoft-attack-simulator",
@@ -857,7 +1946,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 65734
+    "bytes": 58853
   },
   {
     "name": "microsoft-azure-appid",
@@ -885,7 +1974,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 5306
+    "bytes": 3988
   },
   {
     "name": "microsoft-azure-germany",
@@ -917,7 +2006,22 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 5253
+    "bytes": 4508
+  },
+  {
+    "name": "microsoft-mdca-proxy",
+    "title": "List of known Microsoft Defender for Cloud Apps (MDCA/MCAS) proxy hostnames",
+    "description": "Microsoft Defender for Cloud Apps (MDCA/MCAS) hostnames (https://learn.microsoft.com/en-us/defender-cloud-apps/troubleshooting-proxy-url)",
+    "type": "hostname",
+    "matchingAttributes": [
+      "hostname",
+      "domain",
+      "url",
+      "domain|ip"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 772
   },
   {
     "name": "microsoft-office365",
@@ -931,7 +2035,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 5302
+    "bytes": 5279
   },
   {
     "name": "microsoft-office365-cn",
@@ -977,12 +2081,26 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 5268
+    "bytes": 5275
+  },
+  {
+    "name": "microsoft-win11-connection-endpoints",
+    "title": "List of known Windows 11 connection endpoints",
+    "description": "Event contains one or more entries of known Windows 11 connection endpoints (https://learn.microsoft.com/en-us/windows/privacy/manage-windows-11-endpoints)",
+    "type": "string",
+    "matchingAttributes": [
+      "domain",
+      "hostname",
+      "domain|ip"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 5193
   },
   {
     "name": "modat-nt-scanning",
     "title": "Modat IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Modat scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Modat scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -993,7 +2111,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1162
+    "bytes": 1306
   },
   {
     "name": "modat-scanner",
@@ -1009,7 +2127,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1248
+    "bytes": 1244
   },
   {
     "name": "moz-top500",
@@ -1024,7 +2142,7 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 10134
+    "bytes": 10102
   },
   {
     "name": "mozilla-CA",
@@ -1044,7 +2162,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 28291
+    "bytes": 27971
   },
   {
     "name": "mozilla-IntermediateCA",
@@ -1064,7 +2182,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 386089
+    "bytes": 408809
   },
   {
     "name": "multicast",
@@ -1080,7 +2198,39 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 621
+    "bytes": 628
+  },
+  {
+    "name": "netlas-scanning",
+    "title": "Netlas (netlas.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Netlas (netlas.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 671
+  },
+  {
+    "name": "netscout-scanning",
+    "title": "NETSCOUT (internet-albedo.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation NETSCOUT (internet-albedo.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 451
   },
   {
     "name": "netsecscan-nt-scanning",
@@ -1112,12 +2262,44 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 553
+    "bytes": 560
+  },
+  {
+    "name": "odin-scanning",
+    "title": "Cyble ODIN (odin.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Cyble ODIN (odin.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 12359
+  },
+  {
+    "name": "onlyscans-scanning",
+    "title": "ONLYSCANS (onlyscans.com / onlyscans.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation ONLYSCANS (onlyscans.com / onlyscans.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 851
   },
   {
     "name": "onyphe-nt-scanning",
     "title": "Onyphe IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Onyphe scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Onyphe scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1128,7 +2310,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 3470
+    "bytes": 4060
   },
   {
     "name": "onyphe-scanner",
@@ -1149,7 +2331,7 @@
   {
     "name": "openai-gptbot",
     "title": "List of known IP address ranges for OpenAI GPT crawler bot",
-    "description": "OpenAI gptbot crawler (https://openai.com/gptbot-ranges.txt)",
+    "description": "OpenAI gptbot crawler (https://openai.com/gptbot.json)",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1160,12 +2342,28 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 373
+    "bytes": 702
+  },
+  {
+    "name": "oracle-oci",
+    "title": "List of known Oracle Cloud Infrastructure (OCI) IP address ranges",
+    "description": "Oracle Cloud Infrastructure (OCI) IP address ranges (https://docs.oracle.com/en-us/iaas/Content/General/Concepts/addressranges.htm)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 18906
   },
   {
     "name": "ovh-cluster",
-    "title": "List of known Ovh Cluster IP",
-    "description": "OVH Cluster IP address (https://docs.ovh.com/fr/hosting/liste-des-adresses-ip-des-clusters-et-hebergements-web/)",
+    "title": "List of known OVH Cluster IPs",
+    "description": "OVH Cluster IP address (https://docs.ovhcloud.com/en/guides/web-cloud/web-hosting/clusters-and-shared-hosting-ip)",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1176,7 +2374,23 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 11952
+    "bytes": 16375
+  },
+  {
+    "name": "palo-alto-networks-cortex-cloud",
+    "title": "List of known Palo Alto Cortex Cloud IP ranges",
+    "description": "Palo Alto Cortex Cloud IP address ranges (https://docs.ovhcloud.com/en/guides/web-cloud/web-hosting/clusters-and-shared-hosting-ip)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6124
   },
   {
     "name": "palo-alto-networks-cortex-xpanse",
@@ -1192,7 +2406,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 706
+    "bytes": 626
   },
   {
     "name": "parking-domain",
@@ -1238,6 +2452,22 @@
     "bytes": 1838
   },
   {
+    "name": "pocnroll-scanning",
+    "title": "pocnroll (pocnroll.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation pocnroll (pocnroll.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 437
+  },
+  {
     "name": "probethenet-nt-scanning",
     "title": "Probethenet IP Ranges Used for Scanning",
     "description": "List containing IP's associated with the Probethenet scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
@@ -1252,6 +2482,22 @@
     "tier": "context",
     "loadTier": "core",
     "bytes": 555
+  },
+  {
+    "name": "probethenet-scanning",
+    "title": "ProbeTheNet Project / mThreat Technology Inc. (probethenet.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation ProbeTheNet Project / mThreat Technology Inc. (probethenet.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 650
   },
   {
     "name": "public-dns-hostname",
@@ -1282,7 +2528,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 1313670
+    "bytes": 1314425
   },
   {
     "name": "public-dns-v6",
@@ -1298,7 +2544,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 7791
+    "bytes": 10138
   },
   {
     "name": "public-ipfs-gateways",
@@ -1314,12 +2560,44 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 2396
+    "bytes": 2795
+  },
+  {
+    "name": "quake-scanning",
+    "title": "360 Quake (quake.360.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation 360 Quake (quake.360.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 12769
+  },
+  {
+    "name": "rackspace",
+    "title": "List of known Rackspace IP address ranges",
+    "description": "Rackspace IP address ranges, from the prefixes announced by the Rackspace autonomous systems (RIPEstat announced-prefixes). Note this is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 4048
   },
   {
     "name": "rapid7-nt-scanning",
     "title": "Rapid7 IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Rapid7 scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Rapid7 scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1330,12 +2608,60 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 983
+    "bytes": 845
+  },
+  {
+    "name": "rapid7-scanning",
+    "title": "Rapid7 Project Sonar (rapid7.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Rapid7 Project Sonar (rapid7.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 709
+  },
+  {
+    "name": "recordedfuture-scanning",
+    "title": "Recorded Future / SecurityTrails (securitytrails.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Recorded Future / SecurityTrails (securitytrails.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 615
+  },
+  {
+    "name": "recyber-scanning",
+    "title": "Recyber (recyber.net) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Recyber (recyber.net), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 656
   },
   {
     "name": "research-scanner-nt-scanning",
     "title": "Research scanner IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Research scanner scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Research scanner scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1346,7 +2672,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 996
+    "bytes": 1021
+  },
+  {
+    "name": "researchscanner-scanning",
+    "title": "Research Scanner (research-scanner.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Research Scanner (research-scanner.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1058
   },
   {
     "name": "rfc1918",
@@ -1362,7 +2704,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 376
+    "bytes": 383
   },
   {
     "name": "rfc3849",
@@ -1378,7 +2720,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 334
+    "bytes": 341
   },
   {
     "name": "rfc5735",
@@ -1394,7 +2736,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 637
+    "bytes": 644
   },
   {
     "name": "rfc6598",
@@ -1410,7 +2752,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 341
+    "bytes": 348
   },
   {
     "name": "rfc6761",
@@ -1424,7 +2766,55 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 831
+    "bytes": 897
+  },
+  {
+    "name": "rootevidence-scanning",
+    "title": "Root Evidence (rootevidence.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Root Evidence (rootevidence.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 17957
+  },
+  {
+    "name": "salesforce",
+    "title": "List of known Salesforce IP address ranges",
+    "description": "Salesforce IP address ranges, from their published ip-ranges endpoint (https://ip-ranges.salesforce.com/ip-ranges.json). These are fixed SaaS service endpoints rather than rentable compute, which makes them cleaner warninglist material: the addresses stay tied to Salesforce's own platform instead of to whichever tenant rented them today.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 1491
+  },
+  {
+    "name": "scaleway",
+    "title": "List of known Scaleway IP address ranges",
+    "description": "Scaleway (formerly Online SAS) IP address ranges, from the ranges Scaleway documents itself (https://www.scaleway.com/en/docs/account/reference-content/scaleway-network-information.md). This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 934
   },
   {
     "name": "second-level-tlds",
@@ -1438,7 +2828,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 215109
+    "bytes": 218426
   },
   {
     "name": "security-provider-blogpost",
@@ -1454,12 +2844,28 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 17006
+    "bytes": 17013
+  },
+  {
+    "name": "securityresearch-scanning",
+    "title": "securityresearch.net IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation securityresearch.net, as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 432
   },
   {
     "name": "shadowforce-nt-scanning",
     "title": "Shadowforce IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Shadowforce scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Shadowforce scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1486,7 +2892,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 329
+    "bytes": 847
   },
   {
     "name": "shadowserver",
@@ -1502,7 +2908,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1030
+    "bytes": 1350
   },
   {
     "name": "shadowserver-nt-scanning",
@@ -1523,7 +2929,7 @@
   {
     "name": "shodan-nt-scanning",
     "title": "Shodan IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Shodan scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Shodan scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1550,7 +2956,7 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 1271
+    "bytes": 3146
   },
   {
     "name": "sinkholes",
@@ -1566,7 +2972,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 2546
+    "bytes": 4612
   },
   {
     "name": "skipa-nt-scanning",
@@ -1598,7 +3004,7 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 7063
+    "bytes": 6171
   },
   {
     "name": "smtp-sending-ips",
@@ -1614,12 +3020,12 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 23612
+    "bytes": 24352
   },
   {
     "name": "stackpath",
     "title": "List of known Stackpath CDN IP ranges",
-    "description": "List of known Stackpath (Highwinds) CDN IP ranges (https://support.stackpath.com/hc/en-us/articles/360001091666-Whitelist-CDN-WAF-IP-Blocks)",
+    "description": "Empty: StackPath wound down its CDN and the generator's only source (https://k3t9x2h3.map2.ssl.hwcdn.net/ipblocks.txt) is dead (NXDOMAIN); hwcdn.net is now a parked domain-for-sale page. The formerly-listed IP ranges are being reassigned to new owners, so they are no longer safe to whitelist.",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1630,12 +3036,12 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 6787
+    "bytes": 537
   },
   {
     "name": "stretchoid-nt-scanning",
     "title": "Stretchoid IP Ranges Used for Scanning",
-    "description": "List containing IP's associated with the Stretchoid scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/07/08",
+    "description": "List containing IP's associated with the Stretchoid scanners. This scanner CIDR range is extracted from CIRCL Network Telescope analysis on 2026/08/10",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1646,7 +3052,39 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 43855
+    "bytes": 44496
+  },
+  {
+    "name": "stretchoid-scanning",
+    "title": "Stretchoid (stretchoid.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Stretchoid (stretchoid.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 121312
+  },
+  {
+    "name": "sucuri",
+    "title": "List of known Sucuri (Website Firewall) IP address ranges",
+    "description": "Sucuri Website Firewall IP address ranges, scraped from https://docs.sucuri.net/website-firewall/sucuri-firewall-troubleshooting-guide/ (no machine-readable API is published)",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 553
   },
   {
     "name": "telegram-ips",
@@ -1697,6 +3135,38 @@
     "bytes": 858
   },
   {
+    "name": "tenableasm-scanning",
+    "title": "Tenable ASM (tenable.com / tenable.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Tenable ASM (tenable.com / tenable.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 4122
+  },
+  {
+    "name": "tencent-cloud",
+    "title": "List of known Tencent Cloud IP address ranges",
+    "description": "Tencent Cloud IP address ranges, from the prefixes announced by Tencent's autonomous systems as reported by the RIPEstat Data API (https://stat.ripe.net/). Tencent publishes no machine-readable address-space file, so the address space is derived from BGP. This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 6560
+  },
+  {
     "name": "ti-falsepositives",
     "title": "Hashes that are often included in IOC lists but are false positives.",
     "description": "Hashes that are often included in IOC lists but are false positives.",
@@ -1711,7 +3181,7 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 1314782
+    "bytes": 1314789
   },
   {
     "name": "tlds",
@@ -1725,7 +3195,23 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 19788
+    "bytes": 19799
+  },
+  {
+    "name": "tor-exit-nodes",
+    "title": "List of known Tor exit nodes",
+    "description": "Specialized list of IPv4 addresses belonging to Tor exit nodes, from https://github.com/X4BNet/lists_torexit",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 18778
   },
   {
     "name": "tranco",
@@ -1740,7 +3226,7 @@
     ],
     "tier": "popularity",
     "loadTier": "heavy",
-    "bytes": 21813046
+    "bytes": 21805510
   },
   {
     "name": "tranco10k",
@@ -1755,7 +3241,7 @@
     ],
     "tier": "popularity",
     "loadTier": "core",
-    "bytes": 198028
+    "bytes": 198311
   },
   {
     "name": "umbrella-blockpage-hostname",
@@ -1829,7 +3315,23 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 205648
+    "bytes": 205798
+  },
+  {
+    "name": "university-scanning",
+    "title": "Scanners from various universities IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation Scanners from various universities, as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 6953
   },
   {
     "name": "url-shortener",
@@ -1845,7 +3347,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 3999
+    "bytes": 4338
+  },
+  {
+    "name": "visionheight-scanning",
+    "title": "VisionHeight (visionheight.com) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation VisionHeight (visionheight.com), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 5396
   },
   {
     "name": "vpn-ipv4",
@@ -1861,12 +3379,12 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 955247
+    "bytes": 973115
   },
   {
     "name": "vpn-ipv6",
-    "title": "Specialized list of IPv6 addresses belonging to common VPN providers and datacenters",
-    "description": "Specialized list of IPv6 addresses belonging to common VPN providers and datacenters",
+    "title": "Specialized list of vpn-ipv6 addresses belonging to common VPN providers and datacenters",
+    "description": "Specialized list of vpn-ipv6 addresses belonging to common VPN providers and datacenters",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1877,7 +3395,23 @@
     ],
     "tier": "context",
     "loadTier": "core",
-    "bytes": 31621
+    "bytes": 221301
+  },
+  {
+    "name": "vultr",
+    "title": "List of known Vultr IP address ranges",
+    "description": "Vultr (Constant Company, LLC) IP address ranges, from their published RFC 8805 geofeed (https://geofeed.constant.com/). This is general-purpose rented compute: the tenant behind any given address changes constantly and an attacker can simply rent one. The list recognises that an address belongs to the provider; it is NOT grounds for treating traffic as benign.",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "infrastructure",
+    "loadTier": "core",
+    "bytes": 3983
   },
   {
     "name": "whats-my-ip",
@@ -1893,12 +3427,12 @@
     ],
     "tier": "known-fp",
     "loadTier": "core",
-    "bytes": 5073
+    "bytes": 5128
   },
   {
     "name": "wikimedia",
     "title": "List of known Wikimedia address ranges",
-    "description": "Wikimedia address ranges (http://noc.wikimedia.org/conf/reverse-proxy.php.txt)",
+    "description": "Wikimedia address ranges (https://wikitech.wikimedia.org/w/api.php?action=parse&page=IP_and_AS_allocations&format=json&prop=wikitext)",
     "type": "cidr",
     "matchingAttributes": [
       "ip-src",
@@ -1909,7 +3443,55 @@
     ],
     "tier": "infrastructure",
     "loadTier": "core",
-    "bytes": 323
+    "bytes": 610
+  },
+  {
+    "name": "xmco-scanning",
+    "title": "XMCO Serenety (xmco.fr) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation XMCO Serenety (xmco.fr), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 1487
+  },
+  {
+    "name": "zern-scanning",
+    "title": "ZERN (zern.io) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation ZERN (zern.io), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 3565
+  },
+  {
+    "name": "zoomeye-scanning",
+    "title": "ZoomEye (zoomeye.ai) IP ranges used for scanning",
+    "description": "Published source ranges of the internet-wide scanning organisation ZoomEye (zoomeye.ai), as tracked by https://github.com/OpenFilters/internet-scanners",
+    "type": "cidr",
+    "matchingAttributes": [
+      "ip-src",
+      "ip-dst",
+      "domain|ip",
+      "ip-src|port",
+      "ip-dst|port"
+    ],
+    "tier": "context",
+    "loadTier": "core",
+    "bytes": 731
   },
   {
     "name": "zscaler",
